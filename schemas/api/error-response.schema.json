@@ -1,0 +1,59 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/api/error-response.schema.json",
+  "title": "Zorbit API Error Response",
+  "description": "Standard error response format for all Zorbit platform REST APIs.",
+  "type": "object",
+  "required": ["error"],
+  "properties": {
+    "error": {
+      "type": "object",
+      "required": ["code", "message", "requestId"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Machine-readable error code.",
+          "examples": ["UNAUTHORIZED", "NOT_FOUND", "VALIDATION_ERROR", "NAMESPACE_MISMATCH", "FORBIDDEN"]
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable error message.",
+          "examples": ["The requested resource was not found.", "You do not have permission to access this resource."]
+        },
+        "details": {
+          "type": "array",
+          "description": "Optional list of detailed error information (e.g. field-level validation errors).",
+          "items": {
+            "type": "object",
+            "required": ["field", "message"],
+            "properties": {
+              "field": {
+                "type": "string",
+                "description": "The field or parameter that caused the error.",
+                "examples": ["email", "namespace.type"]
+              },
+              "message": {
+                "type": "string",
+                "description": "Description of the error for this field.",
+                "examples": ["Email is required.", "Namespace type must be one of: G, O, D, U."]
+              },
+              "code": {
+                "type": "string",
+                "description": "Machine-readable code for this specific error.",
+                "examples": ["REQUIRED", "INVALID_ENUM"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "requestId": {
+          "type": "string",
+          "description": "Unique request identifier for tracing and support.",
+          "examples": ["REQ-44C1"]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,99 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/events/event-envelope.schema.json",
+  "title": "Zorbit Event Envelope",
+  "description": "Canonical event envelope for all Zorbit platform events. Every event published to Kafka must conform to this schema.",
+  "type": "object",
+  "required": ["id", "type", "source", "timestamp", "namespace", "actor", "data", "metadata"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique event identifier using short hash format.",
+      "pattern": "^EV-[A-F0-9]{4,8}$",
+      "examples": ["EV-883A", "EV-A1F29B"]
+    },
+    "type": {
+      "type": "string",
+      "description": "Event type following domain.entity.action naming convention.",
+      "pattern": "^[a-z]+\\.[a-z]+\\.[a-z]+$",
+      "examples": ["identity.user.created", "policy.claim.submitted", "ai.request.completed"]
+    },
+    "source": {
+      "type": "string",
+      "description": "Name of the service that produced the event.",
+      "examples": ["zorbit-identity", "zorbit-authorization"]
+    },
+    "timestamp": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the event was produced.",
+      "examples": ["2026-03-11T14:30:00.000Z"]
+    },
+    "namespace": {
+      "type": "object",
+      "description": "Namespace context in which the event occurred.",
+      "required": ["type", "id"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["G", "O", "D", "U"],
+          "description": "Namespace type: G=Global, O=Organization, D=Department, U=User."
+        },
+        "id": {
+          "type": "string",
+          "description": "Namespace identifier using short hash format.",
+          "pattern": "^[A-Z]+-[A-F0-9]{4,8}$",
+          "examples": ["O-92AF", "D-51AA"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "actor": {
+      "type": "object",
+      "description": "The entity that triggered the event.",
+      "required": ["type", "id"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["user", "service", "system"],
+          "description": "Type of actor: user, service, or system."
+        },
+        "id": {
+          "type": "string",
+          "description": "Actor identifier using short hash format.",
+          "examples": ["U-81F3", "SVC-A1B2"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "data": {
+      "type": "object",
+      "description": "Event-specific payload. Schema varies by event type."
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Tracing and versioning metadata.",
+      "required": ["correlationId", "causationId", "version"],
+      "properties": {
+        "correlationId": {
+          "type": "string",
+          "description": "Correlation ID for distributed tracing across service boundaries.",
+          "examples": ["COR-9F2A"]
+        },
+        "causationId": {
+          "type": "string",
+          "description": "ID of the event or request that caused this event.",
+          "examples": ["EV-771B", "REQ-44C1"]
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Schema version of this event type.",
+          "examples": [1]
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false
+}

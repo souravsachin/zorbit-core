@@ -1,0 +1,42 @@
+{
+  "name": "nestjs-service",
+  "description": "Standard NestJS service template for Zorbit platform services. Includes namespace middleware, identity authentication, event publishing, and observability instrumentation.",
+  "version": "1.0.0",
+  "variables": {
+    "serviceName": {
+      "description": "Name of the service (e.g. zorbit-claims)",
+      "required": true
+    },
+    "servicePort": {
+      "description": "Port number the service listens on",
+      "required": true,
+      "default": 3000
+    },
+    "domain": {
+      "description": "Event domain name (e.g. claims, identity)",
+      "required": true
+    },
+    "database": {
+      "description": "PostgreSQL database name",
+      "required": true
+    }
+  },
+  "files": [
+    {
+      "template": "src/main.ts.template",
+      "output": "src/main.ts"
+    },
+    {
+      "template": "src/app.module.ts.template",
+      "output": "src/app.module.ts"
+    },
+    {
+      "template": "Dockerfile.template",
+      "output": "Dockerfile"
+    }
+  ],
+  "postScaffold": [
+    "npm install",
+    "npm run lint -- --fix"
+  ]
+}

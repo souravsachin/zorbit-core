@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/api/pagination.schema.json",
+  "title": "Zorbit API Pagination",
+  "description": "Standard pagination envelope for all Zorbit platform list endpoints.",
+  "type": "object",
+  "required": ["page", "pageSize", "totalCount", "totalPages"],
+  "properties": {
+    "page": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Current page number (1-based).",
+      "examples": [1]
+    },
+    "pageSize": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100,
+      "description": "Number of items per page. Maximum 100.",
+      "examples": [20]
+    },
+    "totalCount": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of items across all pages.",
+      "examples": [142]
+    },
+    "totalPages": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Total number of pages.",
+      "examples": [8]
+    }
+  },
+  "additionalProperties": false
+}

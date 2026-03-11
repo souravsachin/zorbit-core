@@ -1,0 +1,22 @@
+{
+  "name": "@zorbit-platform/zorbit-core",
+  "version": "1.0.0",
+  "description": "Platform governance artifacts for the Zorbit platform — schemas, registries, and service templates.",
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate-schemas.js",
+    "validate:events": "node scripts/validate-schemas.js schemas/events",
+    "validate:api": "node scripts/validate-schemas.js schemas/api",
+    "validate:navigation": "node scripts/validate-schemas.js schemas/navigation",
+    "lint:json": "node scripts/validate-json.js"
+  },
+  "devDependencies": {
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zorbit-platform/zorbit-core.git"
+  },
+  "license": "UNLICENSED"
+}

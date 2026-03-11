@@ -1,0 +1,96 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/navigation/navigation.schema.json",
+  "title": "Zorbit Navigation Menu",
+  "description": "Schema for dynamically generated navigation menus returned by the identity service. Frontends use this to render navigation and enforce route access.",
+  "type": "object",
+  "required": ["sections"],
+  "properties": {
+    "sections": {
+      "type": "array",
+      "description": "Top-level navigation sections.",
+      "items": {
+        "$ref": "#/definitions/navigationItem"
+      }
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "navigationItem": {
+      "type": "object",
+      "required": ["id", "label", "privilege"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for this navigation item.",
+          "pattern": "^NAV-[A-F0-9]{4,8}$",
+          "examples": ["NAV-01A1"]
+        },
+        "label": {
+          "type": "string",
+          "description": "Display label for the navigation item.",
+          "examples": ["Users", "Settings", "Dashboard"]
+        },
+        "icon": {
+          "type": "string",
+          "description": "Icon identifier (e.g. Material Icons name or custom icon key).",
+          "examples": ["people", "settings", "dashboard"]
+        },
+        "privilege": {
+          "type": "string",
+          "description": "Privilege code required to see this navigation item.",
+          "examples": ["identity.users.read", "platform.admin"]
+        },
+        "route": {
+          "type": "string",
+          "description": "Frontend route path. Omit for section headers that only contain children.",
+          "examples": ["/admin/users", "/settings"]
+        },
+        "backendRoute": {
+          "type": "string",
+          "description": "Corresponding backend API base path.",
+          "examples": ["/api/v1/O/{org}/users"]
+        },
+        "actions": {
+          "type": "array",
+          "description": "Available actions on this navigation item.",
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "privilege"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Unique action identifier.",
+                "examples": ["ACT-01A1"]
+              },
+              "label": {
+                "type": "string",
+                "description": "Display label for the action.",
+                "examples": ["Create User", "Delete User"]
+              },
+              "privilege": {
+                "type": "string",
+                "description": "Privilege code required to perform this action.",
+                "examples": ["identity.users.write"]
+              },
+              "method": {
+                "type": "string",
+                "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"],
+                "description": "HTTP method for the action."
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "children": {
+          "type": "array",
+          "description": "Nested navigation items.",
+          "items": {
+            "$ref": "#/definitions/navigationItem"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

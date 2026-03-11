@@ -1,0 +1,41 @@
+import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
+import { TypeOrmModule } from '@nestjs/typeorm';
+
+// TODO: Import from @zorbit-platform/sdk-node once available
+// import { IdentityMiddleware, NamespaceMiddleware, ObservabilityModule } from '@zorbit-platform/sdk-node';
+
+@Module({
+  imports: [
+    // Environment configuration
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: ['.env.local', '.env'],
+    }),
+
+    // Database connection
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DB_HOST || 'localhost',
+      port: parseInt(process.env.DB_PORT || '5432', 10),
+      username: process.env.DB_USERNAME || '{{serviceName}}',
+      password: process.env.DB_PASSWORD || '',
+      database: process.env.DB_DATABASE || '{{database}}',
+      autoLoadEntities: true,
+      synchronize: process.env.NODE_ENV !== 'production',
+    }),
+
+    // TODO: Enable once SDK is available
+    // ObservabilityModule.forRoot({ serviceName: '{{serviceName}}' }),
+  ],
+  controllers: [],
+  providers: [],
+})
+export class AppModule implements NestModule {
+  configure(consumer: MiddlewareConsumer) {
+    // TODO: Apply identity and namespace middleware once SDK is available
+    // consumer
+    //   .apply(IdentityMiddleware, NamespaceMiddleware)
+    //   .forRoutes('*');
+  }
+}

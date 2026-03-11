@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Zorbit Event Registry",
+  "description": "Central registry of all platform events. Services must register their events here before publishing.",
+  "version": "1.0.0",
+  "events": [
+    {
+      "type": "identity.user.created",
+      "description": "Emitted when a new user account is created.",
+      "source": "zorbit-identity",
+      "schemaVersion": 1,
+      "namespaceScopes": ["O"],
+      "dataFields": {
+        "userId": "string — short hash identifier of the new user (e.g. U-81F3)",
+        "emailToken": "string — PII vault token for the user's email (e.g. PII-92AF)",
+        "roles": "string[] — initial roles assigned to the user"
+      }
+    },
+    {
+      "type": "identity.user.updated",
+      "description": "Emitted when a user account is modified.",
+      "source": "zorbit-identity",
+      "schemaVersion": 1,
+      "namespaceScopes": ["O"],
+      "dataFields": {
+        "userId": "string — short hash identifier of the updated user",
+        "changedFields": "string[] — list of field names that were modified"
+      }
+    },
+    {
+      "type": "identity.user.deleted",
+      "description": "Emitted when a user account is soft-deleted.",
+      "source": "zorbit-identity",
+      "schemaVersion": 1,
+      "namespaceScopes": ["O"],
+      "dataFields": {
+        "userId": "string — short hash identifier of the deleted user",
+        "deletedBy": "string — actor who performed the deletion"
+      }
+    },
+    {
+      "type": "identity.session.created",
+      "description": "Emitted when a user authenticates and a new session is established.",
+      "source": "zorbit-identity",
+      "schemaVersion": 1,
+      "namespaceScopes": ["O"],
+      "dataFields": {
+        "sessionId": "string — short hash identifier of the session (e.g. SES-4F1A)",
+        "userId": "string — short hash identifier of the authenticated user",
+        "authMethod": "string — authentication method used (e.g. password, sso, mfa)"
+      }
+    },
+    {
+      "type": "identity.session.expired",
+      "description": "Emitted when a user session expires or is explicitly terminated.",
+      "source": "zorbit-identity",
+      "schemaVersion": 1,
+      "namespaceScopes": ["O"],
+      "dataFields": {
+        "sessionId": "string — short hash identifier of the expired session",
+        "userId": "string — short hash identifier of the user",
+        "reason": "string — reason for expiry (timeout, logout, revoked)"
+      }
+    }
+  ]
+}

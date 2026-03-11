@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Zorbit Privilege Registry",
+  "description": "Central registry of all platform privileges. Services must register their privileges here. Authorization service enforces these.",
+  "version": "1.0.0",
+  "privileges": [
+    {
+      "id": "PRV-A1F2",
+      "code": "identity.users.read",
+      "description": "Read access to user accounts within the scoped namespace.",
+      "namespaceScopes": ["G", "O", "D"]
+    },
+    {
+      "id": "PRV-B3D4",
+      "code": "identity.users.write",
+      "description": "Create and update user accounts within the scoped namespace.",
+      "namespaceScopes": ["G", "O", "D"]
+    },
+    {
+      "id": "PRV-C5E6",
+      "code": "identity.users.delete",
+      "description": "Soft-delete user accounts within the scoped namespace.",
+      "namespaceScopes": ["G", "O"]
+    },
+    {
+      "id": "PRV-D7F8",
+      "code": "identity.sessions.read",
+      "description": "View active sessions within the scoped namespace.",
+      "namespaceScopes": ["G", "O", "D"]
+    },
+    {
+      "id": "PRV-E9A1",
+      "code": "identity.sessions.write",
+      "description": "Create and terminate sessions. Typically granted to the identity service itself.",
+      "namespaceScopes": ["G", "O"]
+    },
+    {
+      "id": "PRV-F2B3",
+      "code": "platform.admin",
+      "description": "Full administrative access across all platform services. Reserved for platform operators.",
+      "namespaceScopes": ["G"]
+    }
+  ]
+}
