@@ -1,0 +1,192 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/dashboard/widget.schema.json",
+  "title": "Zorbit Dashboard Widget",
+  "description": "Schema for configurable dashboard widgets. Widgets display metrics, charts, tables, lists, or gauges and can be scoped to specific roles.",
+  "type": "object",
+  "required": ["id", "title", "type", "metric_query", "position", "org_id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique widget identifier using short hash format.",
+      "pattern": "^WDG-[A-F0-9]{4,8}$",
+      "examples": ["WDG-01A1", "WDG-B2C3"]
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title for the widget.",
+      "examples": ["Total Users", "Revenue Chart", "Recent Events"]
+    },
+    "type": {
+      "type": "string",
+      "enum": ["count", "chart", "table", "list", "gauge"],
+      "description": "Widget rendering type. Determines which renderer component is used."
+    },
+    "metric_query": {
+      "type": "string",
+      "description": "API path template for fetching widget data. Uses handlebars syntax for namespace variables.",
+      "examples": [
+        "/api/v1/O/{{org_id}}/users/count",
+        "/api/v1/O/{{org_id}}/audit/logs?limit=10",
+        "/api/v1/O/{{org_id}}/products/stats"
+      ]
+    },
+    "config": {
+      "type": "object",
+      "description": "Type-specific widget configuration.",
+      "properties": {
+        "color": {
+          "type": "string",
+          "description": "Primary color for the widget (CSS color value or theme key).",
+          "examples": ["#4CAF50", "primary", "error"]
+        },
+        "icon": {
+          "type": "string",
+          "description": "Material Icon name displayed alongside the widget value.",
+          "examples": ["people", "trending_up", "attach_money"]
+        },
+        "refresh_interval_seconds": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 300,
+          "description": "Auto-refresh interval in seconds. 0 disables auto-refresh."
+        },
+        "chart_type": {
+          "type": "string",
+          "enum": ["line", "bar", "pie", "doughnut", "area"],
+          "description": "Chart subtype. Only applicable when widget type is 'chart'."
+        },
+        "columns": {
+          "type": "array",
+          "description": "Column definitions. Only applicable when widget type is 'table'.",
+          "items": {
+            "type": "object",
+            "required": ["key", "label"],
+            "properties": {
+              "key": {
+                "type": "string",
+                "description": "Data field key."
+              },
+              "label": {
+                "type": "string",
+                "description": "Column header label."
+              },
+              "width": {
+                "type": "string",
+                "description": "Column width (CSS value).",
+                "examples": ["120px", "20%"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "max_items": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 10,
+          "description": "Maximum items to display. Applicable to 'list' and 'table' types."
+        },
+        "min_value": {
+          "type": "number",
+          "description": "Minimum value for gauge scale. Only applicable when widget type is 'gauge'."
+        },
+        "max_value": {
+          "type": "number",
+          "description": "Maximum value for gauge scale. Only applicable when widget type is 'gauge'."
+        },
+        "thresholds": {
+          "type": "array",
+          "description": "Color thresholds for gauge widgets. Defines color bands.",
+          "items": {
+            "type": "object",
+            "required": ["value", "color"],
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "Threshold value."
+              },
+              "color": {
+                "type": "string",
+                "description": "Color for values up to this threshold.",
+                "examples": ["#4CAF50", "#FFC107", "#F44336"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "unit": {
+          "type": "string",
+          "description": "Unit label displayed with the value.",
+          "examples": ["%", "ms", "users", "events/s"]
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix displayed before the value.",
+          "examples": ["$", "#"]
+        }
+      },
+      "additionalProperties": true
+    },
+    "roles": {
+      "type": "array",
+      "description": "Role codes that can see this widget. Empty array means visible to all authenticated users.",
+      "items": {
+        "type": "string",
+        "examples": ["super_admin", "org_admin", "viewer"]
+      }
+    },
+    "position": {
+      "type": "object",
+      "description": "Grid position and size for the widget in the dashboard layout.",
+      "required": ["x", "y", "w", "h"],
+      "properties": {
+        "x": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Column position (0-indexed)."
+        },
+        "y": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Row position (0-indexed)."
+        },
+        "w": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Width in grid columns."
+        },
+        "h": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Height in grid rows."
+        }
+      },
+      "additionalProperties": false
+    },
+    "org_id": {
+      "type": "string",
+      "description": "Organization namespace scope for this widget.",
+      "pattern": "^O-[A-F0-9]{4,8}$",
+      "examples": ["O-92AF"]
+    },
+    "created_by": {
+      "type": "string",
+      "description": "User who created this widget.",
+      "pattern": "^U-[A-F0-9]{4,8}$",
+      "examples": ["U-81F3"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the widget was created.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last update.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    }
+  },
+  "additionalProperties": false
+}

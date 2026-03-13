@@ -1,0 +1,79 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/dashboard/widget-types.json",
+  "title": "Zorbit Dashboard Widget Types",
+  "description": "Enum definition for supported dashboard widget types and their rendering metadata.",
+  "type": "object",
+  "properties": {
+    "widget_types": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type", "label", "description", "icon"],
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Machine-readable widget type key."
+          },
+          "label": {
+            "type": "string",
+            "description": "Human-readable display name."
+          },
+          "description": {
+            "type": "string",
+            "description": "Short description of what this widget type renders."
+          },
+          "icon": {
+            "type": "string",
+            "description": "Material Icon name for this widget type."
+          },
+          "supports_config": {
+            "type": "array",
+            "description": "Config keys supported by this widget type.",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "widget_types": [
+    {
+      "type": "count",
+      "label": "Count",
+      "description": "Displays a single numeric value with optional icon and color.",
+      "icon": "pin",
+      "supports_config": ["color", "icon", "prefix", "unit", "refresh_interval_seconds"]
+    },
+    {
+      "type": "chart",
+      "label": "Chart",
+      "description": "Renders data as a line, bar, pie, doughnut, or area chart.",
+      "icon": "bar_chart",
+      "supports_config": ["chart_type", "color", "refresh_interval_seconds"]
+    },
+    {
+      "type": "table",
+      "label": "Table",
+      "description": "Displays tabular data with configurable columns.",
+      "icon": "table_chart",
+      "supports_config": ["columns", "max_items", "refresh_interval_seconds"]
+    },
+    {
+      "type": "list",
+      "label": "List",
+      "description": "Displays a vertical list of items with optional icons.",
+      "icon": "list",
+      "supports_config": ["max_items", "icon", "refresh_interval_seconds"]
+    },
+    {
+      "type": "gauge",
+      "label": "Gauge",
+      "description": "Displays a gauge meter with min/max range and color thresholds.",
+      "icon": "speed",
+      "supports_config": ["min_value", "max_value", "thresholds", "unit", "color", "refresh_interval_seconds"]
+    }
+  ]
+}

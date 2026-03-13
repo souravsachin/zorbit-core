@@ -1,0 +1,111 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/navigation/privilege.schema.json",
+  "title": "Zorbit Privilege",
+  "description": "Schema for privileges with extended navigation fields. Each privilege represents a menu item with frontend and backend route configurations using handlebars templates.",
+  "type": "object",
+  "required": ["id", "privilege_code", "privilege_label", "section_id"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique privilege identifier using short hash format.",
+      "pattern": "^PRV-[A-F0-9]{4,8}$",
+      "examples": ["PRV-01A1", "PRV-B2C3"]
+    },
+    "privilege_code": {
+      "type": "string",
+      "description": "Dot-notation privilege code. Format: domain.entity.action.",
+      "pattern": "^[a-z]+\\.[a-z_]+\\.[a-z]+$",
+      "examples": ["identity.users.read", "products.configurator.read", "dashboard.widgets.write"]
+    },
+    "privilege_label": {
+      "type": "string",
+      "description": "Human-readable display label for the privilege.",
+      "examples": ["View Users", "Product Catalog", "Dashboard Designer"]
+    },
+    "section_id": {
+      "type": "string",
+      "description": "Foreign key to the privilege section this privilege belongs to.",
+      "pattern": "^SEC-[A-F0-9]{4,8}$",
+      "examples": ["SEC-01A1"]
+    },
+    "fe_route_config": {
+      "type": "string",
+      "description": "Frontend route path template using handlebars syntax. Variables like {{org_id}} and {{user_id}} are resolved at runtime.",
+      "examples": [
+        "/org/{{org_id}}/users",
+        "/org/{{org_id}}/products",
+        "/org/{{org_id}}/dashboard/{{user_id}}"
+      ]
+    },
+    "be_route_config": {
+      "type": "string",
+      "description": "Backend API route template using handlebars syntax. Resolved at runtime for service-to-service calls.",
+      "examples": [
+        "/api/v1/O/{{org_id}}/users",
+        "/api/v1/O/{{org_id}}/products",
+        "/api/v1/U/{{user_id}}/menu"
+      ]
+    },
+    "icon": {
+      "type": "string",
+      "description": "Material Icon name for the menu item.",
+      "examples": ["people", "inventory_2", "dashboard"]
+    },
+    "visible_in_menu": {
+      "type": "boolean",
+      "default": true,
+      "description": "Controls whether this privilege appears as a visible menu item. Some privileges are backend-only and should not render in the menu."
+    },
+    "seq_number": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Display order of the privilege within its section. Lower numbers appear first.",
+      "examples": [1, 2, 3]
+    },
+    "actions": {
+      "type": "array",
+      "description": "Available actions associated with this privilege.",
+      "items": {
+        "type": "object",
+        "required": ["id", "label", "privilege"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique action identifier.",
+            "examples": ["ACT-01A1"]
+          },
+          "label": {
+            "type": "string",
+            "description": "Display label for the action.",
+            "examples": ["Create User", "Delete Product"]
+          },
+          "privilege": {
+            "type": "string",
+            "description": "Privilege code required to perform this action.",
+            "examples": ["identity.users.write"]
+          },
+          "method": {
+            "type": "string",
+            "enum": ["GET", "POST", "PUT", "PATCH", "DELETE"],
+            "description": "HTTP method for the action."
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the privilege was created.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last update.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    }
+  },
+  "additionalProperties": false
+}

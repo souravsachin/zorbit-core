@@ -1,0 +1,77 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/demo/demo-playlist.schema.json",
+  "title": "Zorbit Demo Playlist",
+  "description": "Schema for demo playlists that sequence multiple demo segments for guided training sessions.",
+  "type": "object",
+  "required": ["id", "title", "segments"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique playlist identifier using short hash format.",
+      "pattern": "^DPL-[A-F0-9]{4,8}$",
+      "examples": ["DPL-01A1", "DPL-B2C3"]
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title for the playlist.",
+      "examples": ["New User Onboarding", "Admin Training Series"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of the playlist purpose and content.",
+      "examples": ["Complete onboarding walkthrough for new platform users."]
+    },
+    "segments": {
+      "type": "array",
+      "description": "Ordered list of segment entries in the playlist.",
+      "items": {
+        "$ref": "#/definitions/playlist_entry"
+      }
+    },
+    "created_by": {
+      "type": "string",
+      "description": "User who created this playlist.",
+      "pattern": "^U-[A-F0-9]{4,8}$",
+      "examples": ["U-81F3"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the playlist was created.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last update.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "playlist_entry": {
+      "type": "object",
+      "required": ["segment_id", "seq"],
+      "properties": {
+        "segment_id": {
+          "type": "string",
+          "description": "Reference to a demo segment.",
+          "pattern": "^DEM-[A-F0-9]{4,8}$",
+          "examples": ["DEM-01A1"]
+        },
+        "seq": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Playback order within the playlist (1-indexed)."
+        },
+        "auto_play": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether to automatically start this segment when the previous one finishes."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

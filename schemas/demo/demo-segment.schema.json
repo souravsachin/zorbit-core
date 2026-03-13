@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/demo/demo-segment.schema.json",
+  "title": "Zorbit Demo Segment",
+  "description": "Schema for demo and training segments. Supports interactive step-by-step walkthroughs and pre-recorded video segments.",
+  "type": "object",
+  "required": ["id", "title", "type"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique demo segment identifier using short hash format.",
+      "pattern": "^DEM-[A-F0-9]{4,8}$",
+      "examples": ["DEM-01A1", "DEM-B2C3"]
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title for the demo segment.",
+      "examples": ["Login & Dashboard Overview", "User Management"]
+    },
+    "description": {
+      "type": "string",
+      "description": "Brief description of what this demo segment covers.",
+      "examples": ["Learn how to log in and navigate the dashboard."]
+    },
+    "duration": {
+      "type": "string",
+      "description": "Estimated duration in M:SS format.",
+      "pattern": "^[0-9]+:[0-5][0-9]$",
+      "examples": ["2:30", "3:00", "5:15"]
+    },
+    "type": {
+      "type": "string",
+      "enum": ["interactive", "video"],
+      "description": "Segment type. Interactive segments execute steps in the browser. Video segments play a pre-recorded video."
+    },
+    "builtin": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a built-in segment. Built-in segments are read-only and can be duplicated but not edited or deleted."
+    },
+    "category": {
+      "type": "string",
+      "description": "Category for grouping and filtering segments.",
+      "examples": ["onboarding", "admin", "reports", "identity", "products"]
+    },
+    "steps": {
+      "type": "array",
+      "description": "Ordered list of steps for interactive-type segments.",
+      "items": {
+        "$ref": "#/definitions/step"
+      }
+    },
+    "video_url": {
+      "type": ["string", "null"],
+      "description": "Video URL for video-type segments. Supports direct MP4/WebM URLs, YouTube embeds, and Loom embeds.",
+      "examples": [
+        "https://www.youtube.com/embed/dQw4w9WgXcQ",
+        "https://www.loom.com/embed/abc123",
+        "https://cdn.zorbit-platform.com/demos/onboarding.mp4"
+      ]
+    },
+    "tts_enabled": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether text-to-speech narration is enabled for interactive steps."
+    },
+    "created_by": {
+      "type": "string",
+      "description": "User who created this segment.",
+      "pattern": "^U-[A-F0-9]{4,8}$",
+      "examples": ["U-81F3"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the segment was created.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last update.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "step": {
+      "type": "object",
+      "required": ["seq", "action"],
+      "properties": {
+        "seq": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Step sequence number (1-indexed)."
+        },
+        "action": {
+          "type": "string",
+          "enum": ["info", "navigate", "type", "click", "highlight", "scroll", "wait"],
+          "description": "Step action type. info=display message, navigate=change route, type=enter text, click=click element, highlight=highlight element, scroll=scroll to element, wait=pause."
+        },
+        "target": {
+          "type": "string",
+          "description": "CSS selector or route path for the action target.",
+          "examples": ["#login-button", "[data-testid='user-table']", "/org/{{org_id}}/dashboard"]
+        },
+        "value": {
+          "type": "string",
+          "description": "Value for the action. Text to type, info message to display, scroll position, etc.",
+          "examples": ["admin@zorbit.com", "Click the login button to proceed.", "top"]
+        },
+        "delay_ms": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 500,
+          "description": "Delay in milliseconds before executing this step or wait duration for wait actions."
+        },
+        "narration": {
+          "type": "string",
+          "description": "Text-to-speech narration for this step. Read aloud when TTS is enabled.",
+          "examples": ["Now let's click the login button.", "Enter your email address in the field."]
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

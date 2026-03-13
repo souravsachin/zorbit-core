@@ -1,0 +1,85 @@
+{
+  "$comment": "Default privilege sections seeded on platform bootstrap. These define the top-level menu categories visible in the hamburger menu.",
+  "sections": [
+    {
+      "id": "SEC-D1A0",
+      "section_code": "dashboard",
+      "section_label": "Dashboard",
+      "icon": "dashboard",
+      "seq_number": 1,
+      "visible": true
+    },
+    {
+      "id": "SEC-I2B1",
+      "section_code": "identity",
+      "section_label": "Identity",
+      "icon": "people",
+      "seq_number": 2,
+      "visible": true
+    },
+    {
+      "id": "SEC-A3C2",
+      "section_code": "authorization",
+      "section_label": "Authorization",
+      "icon": "security",
+      "seq_number": 3,
+      "visible": true
+    },
+    {
+      "id": "SEC-N4D3",
+      "section_code": "navigation",
+      "section_label": "Navigation",
+      "icon": "menu",
+      "seq_number": 4,
+      "visible": true
+    },
+    {
+      "id": "SEC-M5E4",
+      "section_code": "messaging",
+      "section_label": "Messaging",
+      "icon": "send",
+      "seq_number": 5,
+      "visible": true
+    },
+    {
+      "id": "SEC-U6F5",
+      "section_code": "audit",
+      "section_label": "Audit",
+      "icon": "history",
+      "seq_number": 6,
+      "visible": true
+    },
+    {
+      "id": "SEC-P7G6",
+      "section_code": "pii_vault",
+      "section_label": "PII Vault",
+      "icon": "lock",
+      "seq_number": 7,
+      "visible": true
+    },
+    {
+      "id": "SEC-S8H7",
+      "section_code": "settings",
+      "section_label": "Settings",
+      "icon": "settings",
+      "seq_number": 8,
+      "visible": true
+    },
+    {
+      "id": "SEC-A9I8",
+      "section_code": "admin",
+      "section_label": "Admin",
+      "icon": "admin_panel_settings",
+      "seq_number": 9,
+      "visible": true
+    },
+    {
+      "id": "SEC-R0J9",
+      "section_code": "products",
+      "section_label": "Products",
+      "icon": "inventory_2",
+      "seq_number": 10,
+      "visible": true
+    }
+  ]
+}

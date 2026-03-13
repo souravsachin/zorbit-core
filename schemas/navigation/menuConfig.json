@@ -1,0 +1,425 @@
+{
+  "$comment": "Static fallback menu configuration. Used when the database menu source is unavailable or MENU_SOURCE is set to 'static'. Sections and privileges reference zorbit-core seed data.",
+  "sections": [
+    {
+      "id": "SEC-D1A0",
+      "section_code": "dashboard",
+      "section_label": "Dashboard",
+      "icon": "dashboard",
+      "seq_number": 1,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-D101",
+          "privilege_code": "dashboard.overview.read",
+          "privilege_label": "Dashboard Overview",
+          "fe_route_config": "/org/{{org_id}}/dashboard",
+          "be_route_config": "/api/v1/O/{{org_id}}/dashboard/view",
+          "icon": "space_dashboard",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-D102",
+          "privilege_code": "dashboard.designer.write",
+          "privilege_label": "Dashboard Designer",
+          "fe_route_config": "/org/{{org_id}}/dashboard/designer",
+          "be_route_config": "/api/v1/O/{{org_id}}/dashboard/designer",
+          "icon": "design_services",
+          "visible_in_menu": true,
+          "seq_number": 2
+        }
+      ]
+    },
+    {
+      "id": "SEC-I2B1",
+      "section_code": "identity",
+      "section_label": "Identity",
+      "icon": "people",
+      "seq_number": 2,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-I201",
+          "privilege_code": "identity.users.read",
+          "privilege_label": "Users",
+          "fe_route_config": "/org/{{org_id}}/users",
+          "be_route_config": "/api/v1/O/{{org_id}}/users",
+          "icon": "person",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-I202",
+          "privilege_code": "identity.organizations.read",
+          "privilege_label": "Organizations",
+          "fe_route_config": "/org/{{org_id}}/organizations",
+          "be_route_config": "/api/v1/O/{{org_id}}/organizations",
+          "icon": "corporate_fare",
+          "visible_in_menu": true,
+          "seq_number": 2
+        },
+        {
+          "id": "PRV-I203",
+          "privilege_code": "identity.sessions.read",
+          "privilege_label": "Sessions",
+          "fe_route_config": "/org/{{org_id}}/sessions",
+          "be_route_config": "/api/v1/O/{{org_id}}/sessions",
+          "icon": "devices",
+          "visible_in_menu": true,
+          "seq_number": 3
+        },
+        {
+          "id": "PRV-I204",
+          "privilege_code": "identity.providers.read",
+          "privilege_label": "Auth Providers",
+          "fe_route_config": "/org/{{org_id}}/auth-providers",
+          "be_route_config": "/api/v1/O/{{org_id}}/auth-providers",
+          "icon": "key",
+          "visible_in_menu": true,
+          "seq_number": 4
+        }
+      ]
+    },
+    {
+      "id": "SEC-A3C2",
+      "section_code": "authorization",
+      "section_label": "Authorization",
+      "icon": "security",
+      "seq_number": 3,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-A301",
+          "privilege_code": "authorization.roles.read",
+          "privilege_label": "Roles",
+          "fe_route_config": "/org/{{org_id}}/roles",
+          "be_route_config": "/api/v1/O/{{org_id}}/roles",
+          "icon": "admin_panel_settings",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-A302",
+          "privilege_code": "authorization.privileges.read",
+          "privilege_label": "Privileges",
+          "fe_route_config": "/org/{{org_id}}/privileges",
+          "be_route_config": "/api/v1/G/privileges",
+          "icon": "verified_user",
+          "visible_in_menu": true,
+          "seq_number": 2
+        },
+        {
+          "id": "PRV-A303",
+          "privilege_code": "authorization.sections.read",
+          "privilege_label": "Privilege Sections",
+          "fe_route_config": "/org/{{org_id}}/sections",
+          "be_route_config": "/api/v1/G/sections",
+          "icon": "folder",
+          "visible_in_menu": true,
+          "seq_number": 3
+        },
+        {
+          "id": "PRV-A304",
+          "privilege_code": "authorization.policies.read",
+          "privilege_label": "Policies",
+          "fe_route_config": "/org/{{org_id}}/policies",
+          "be_route_config": "/api/v1/O/{{org_id}}/policies",
+          "icon": "policy",
+          "visible_in_menu": true,
+          "seq_number": 4
+        }
+      ]
+    },
+    {
+      "id": "SEC-N4D3",
+      "section_code": "navigation",
+      "section_label": "Navigation",
+      "icon": "menu",
+      "seq_number": 4,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-N401",
+          "privilege_code": "navigation.menu.read",
+          "privilege_label": "Menu Configuration",
+          "fe_route_config": "/org/{{org_id}}/navigation/menu",
+          "be_route_config": "/api/v1/U/{{user_id}}/menu",
+          "icon": "list",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-N402",
+          "privilege_code": "navigation.routes.read",
+          "privilege_label": "Route Registry",
+          "fe_route_config": "/org/{{org_id}}/navigation/routes",
+          "be_route_config": "/api/v1/G/routes",
+          "icon": "alt_route",
+          "visible_in_menu": true,
+          "seq_number": 2
+        }
+      ]
+    },
+    {
+      "id": "SEC-M5E4",
+      "section_code": "messaging",
+      "section_label": "Messaging",
+      "icon": "send",
+      "seq_number": 5,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-M501",
+          "privilege_code": "messaging.events.read",
+          "privilege_label": "Event Explorer",
+          "fe_route_config": "/org/{{org_id}}/messaging/events",
+          "be_route_config": "/api/v1/O/{{org_id}}/events",
+          "icon": "bolt",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-M502",
+          "privilege_code": "messaging.topics.read",
+          "privilege_label": "Topics",
+          "fe_route_config": "/org/{{org_id}}/messaging/topics",
+          "be_route_config": "/api/v1/O/{{org_id}}/topics",
+          "icon": "topic",
+          "visible_in_menu": true,
+          "seq_number": 2
+        },
+        {
+          "id": "PRV-M503",
+          "privilege_code": "messaging.subscriptions.read",
+          "privilege_label": "Subscriptions",
+          "fe_route_config": "/org/{{org_id}}/messaging/subscriptions",
+          "be_route_config": "/api/v1/O/{{org_id}}/subscriptions",
+          "icon": "notifications",
+          "visible_in_menu": true,
+          "seq_number": 3
+        }
+      ]
+    },
+    {
+      "id": "SEC-U6F5",
+      "section_code": "audit",
+      "section_label": "Audit",
+      "icon": "history",
+      "seq_number": 6,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-U601",
+          "privilege_code": "audit.logs.read",
+          "privilege_label": "Audit Logs",
+          "fe_route_config": "/org/{{org_id}}/audit/logs",
+          "be_route_config": "/api/v1/O/{{org_id}}/audit/logs",
+          "icon": "receipt_long",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-U602",
+          "privilege_code": "audit.reports.read",
+          "privilege_label": "Audit Reports",
+          "fe_route_config": "/org/{{org_id}}/audit/reports",
+          "be_route_config": "/api/v1/O/{{org_id}}/audit/reports",
+          "icon": "assessment",
+          "visible_in_menu": true,
+          "seq_number": 2
+        }
+      ]
+    },
+    {
+      "id": "SEC-P7G6",
+      "section_code": "pii_vault",
+      "section_label": "PII Vault",
+      "icon": "lock",
+      "seq_number": 7,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-P701",
+          "privilege_code": "pii.tokens.read",
+          "privilege_label": "Token Explorer",
+          "fe_route_config": "/org/{{org_id}}/pii/tokens",
+          "be_route_config": "/api/v1/O/{{org_id}}/pii/tokens",
+          "icon": "vpn_key",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-P702",
+          "privilege_code": "pii.vault.read",
+          "privilege_label": "Vault Status",
+          "fe_route_config": "/org/{{org_id}}/pii/status",
+          "be_route_config": "/api/v1/O/{{org_id}}/pii/status",
+          "icon": "shield",
+          "visible_in_menu": true,
+          "seq_number": 2
+        }
+      ]
+    },
+    {
+      "id": "SEC-S8H7",
+      "section_code": "settings",
+      "section_label": "Settings",
+      "icon": "settings",
+      "seq_number": 8,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-S801",
+          "privilege_code": "settings.general.read",
+          "privilege_label": "General Settings",
+          "fe_route_config": "/org/{{org_id}}/settings/general",
+          "be_route_config": "/api/v1/O/{{org_id}}/settings",
+          "icon": "tune",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-S802",
+          "privilege_code": "settings.branding.read",
+          "privilege_label": "Branding",
+          "fe_route_config": "/org/{{org_id}}/settings/branding",
+          "be_route_config": "/api/v1/O/{{org_id}}/settings/branding",
+          "icon": "palette",
+          "visible_in_menu": true,
+          "seq_number": 2
+        },
+        {
+          "id": "PRV-S803",
+          "privilege_code": "settings.integrations.read",
+          "privilege_label": "Integrations",
+          "fe_route_config": "/org/{{org_id}}/settings/integrations",
+          "be_route_config": "/api/v1/O/{{org_id}}/settings/integrations",
+          "icon": "extension",
+          "visible_in_menu": true,
+          "seq_number": 3
+        }
+      ]
+    },
+    {
+      "id": "SEC-A9I8",
+      "section_code": "admin",
+      "section_label": "Admin",
+      "icon": "admin_panel_settings",
+      "seq_number": 9,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-A901",
+          "privilege_code": "admin.platform.read",
+          "privilege_label": "Platform Overview",
+          "fe_route_config": "/admin/platform",
+          "be_route_config": "/api/v1/G/platform/status",
+          "icon": "monitoring",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-A902",
+          "privilege_code": "admin.services.read",
+          "privilege_label": "Service Registry",
+          "fe_route_config": "/admin/services",
+          "be_route_config": "/api/v1/G/services",
+          "icon": "dns",
+          "visible_in_menu": true,
+          "seq_number": 2
+        },
+        {
+          "id": "PRV-A903",
+          "privilege_code": "admin.demo.read",
+          "privilege_label": "Demo & Training",
+          "fe_route_config": "/admin/demo",
+          "be_route_config": "/api/v1/G/demo/segments",
+          "icon": "school",
+          "visible_in_menu": true,
+          "seq_number": 3
+        },
+        {
+          "id": "PRV-A904",
+          "privilege_code": "admin.observability.read",
+          "privilege_label": "Observability",
+          "fe_route_config": "/admin/observability",
+          "be_route_config": "/api/v1/G/observability/metrics",
+          "icon": "insights",
+          "visible_in_menu": true,
+          "seq_number": 4
+        }
+      ]
+    },
+    {
+      "id": "SEC-R0J9",
+      "section_code": "products",
+      "section_label": "Products",
+      "icon": "inventory_2",
+      "seq_number": 10,
+      "visible": true,
+      "privileges": [
+        {
+          "id": "PRV-R001",
+          "privilege_code": "products.catalog.read",
+          "privilege_label": "Product Catalog",
+          "fe_route_config": "/org/{{org_id}}/products",
+          "be_route_config": "/api/v1/O/{{org_id}}/products",
+          "icon": "inventory",
+          "visible_in_menu": true,
+          "seq_number": 1
+        },
+        {
+          "id": "PRV-R002",
+          "privilege_code": "products.designer.read",
+          "privilege_label": "Product Designer",
+          "fe_route_config": "/org/{{org_id}}/products/designer",
+          "be_route_config": "/api/v1/O/{{org_id}}/products",
+          "icon": "architecture",
+          "visible_in_menu": true,
+          "seq_number": 2
+        },
+        {
+          "id": "PRV-R003",
+          "privilege_code": "products.encounters.read",
+          "privilege_label": "Encounter Types",
+          "fe_route_config": "/org/{{org_id}}/products/encounters",
+          "be_route_config": "/api/v1/O/{{org_id}}/encounter-types",
+          "icon": "category",
+          "visible_in_menu": true,
+          "seq_number": 3
+        },
+        {
+          "id": "PRV-R004",
+          "privilege_code": "products.rating.read",
+          "privilege_label": "Rating Engine",
+          "fe_route_config": "/org/{{org_id}}/products/rating",
+          "be_route_config": "/api/v1/O/{{org_id}}/products/rating-factors",
+          "icon": "calculate",
+          "visible_in_menu": true,
+          "seq_number": 4
+        },
+        {
+          "id": "PRV-R005",
+          "privilege_code": "products.rules.read",
+          "privilege_label": "Rules Engine",
+          "fe_route_config": "/org/{{org_id}}/products/rules",
+          "be_route_config": "/api/v1/O/{{org_id}}/products/rules",
+          "icon": "rule",
+          "visible_in_menu": true,
+          "seq_number": 5
+        },
+        {
+          "id": "PRV-R006",
+          "privilege_code": "products.forms.read",
+          "privilege_label": "Forms Builder",
+          "fe_route_config": "/org/{{org_id}}/products/forms",
+          "be_route_config": "/api/v1/O/{{org_id}}/products/forms",
+          "icon": "dynamic_form",
+          "visible_in_menu": true,
+          "seq_number": 6
+        }
+      ]
+    }
+  ]
+}

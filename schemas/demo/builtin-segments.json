@@ -1,0 +1,204 @@
+{
+  "$comment": "Pre-configured built-in demo segments. Seeded on first boot. These are read-only and can be duplicated by users to create custom variants.",
+  "segments": [
+    {
+      "id": "DEM-0001",
+      "title": "Login & Dashboard Overview",
+      "description": "Learn how to log in to the platform and explore the main dashboard, including widgets, quick actions, and navigation.",
+      "duration": "2:30",
+      "type": "interactive",
+      "builtin": true,
+      "category": "onboarding",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "Welcome to Zorbit! Let's start by logging in to the platform.", "delay_ms": 0, "narration": "Welcome to Zorbit. Let's start by logging in to the platform." },
+        { "seq": 2, "action": "navigate", "target": "/login", "value": null, "delay_ms": 500, "narration": "First, navigate to the login page." },
+        { "seq": 3, "action": "highlight", "target": "#email-input", "value": null, "delay_ms": 1000, "narration": "Enter your email address in this field." },
+        { "seq": 4, "action": "type", "target": "#email-input", "value": "demo@zorbit-platform.com", "delay_ms": 500, "narration": null },
+        { "seq": 5, "action": "highlight", "target": "#password-input", "value": null, "delay_ms": 500, "narration": "Now enter your password." },
+        { "seq": 6, "action": "type", "target": "#password-input", "value": "demo-password", "delay_ms": 500, "narration": null },
+        { "seq": 7, "action": "click", "target": "#login-button", "value": null, "delay_ms": 1000, "narration": "Click the login button to sign in." },
+        { "seq": 8, "action": "wait", "target": null, "value": null, "delay_ms": 2000, "narration": "The dashboard is loading." },
+        { "seq": 9, "action": "info", "target": null, "value": "You are now on the main dashboard. Here you can see your widgets, quick actions, and platform overview.", "delay_ms": 0, "narration": "You are now on the main dashboard. Here you can see your widgets, quick actions, and platform overview." },
+        { "seq": 10, "action": "highlight", "target": "[data-testid='hamburger-menu']", "value": null, "delay_ms": 1500, "narration": "Use the sidebar menu to navigate between platform sections." }
+      ]
+    },
+    {
+      "id": "DEM-0002",
+      "title": "User Management",
+      "description": "Create, edit, and manage user accounts. Learn about user roles and organization assignments.",
+      "duration": "3:00",
+      "type": "interactive",
+      "builtin": true,
+      "category": "identity",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "In this segment, we'll learn how to manage users on the platform.", "delay_ms": 0, "narration": "In this segment, we'll learn how to manage users on the platform." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/users", "value": null, "delay_ms": 500, "narration": "Navigate to the Users page." },
+        { "seq": 3, "action": "highlight", "target": "[data-testid='user-table']", "value": null, "delay_ms": 1000, "narration": "This table shows all users in your organization." },
+        { "seq": 4, "action": "highlight", "target": "[data-testid='create-user-btn']", "value": null, "delay_ms": 1000, "narration": "Click here to create a new user." },
+        { "seq": 5, "action": "click", "target": "[data-testid='create-user-btn']", "value": null, "delay_ms": 1000, "narration": "Let's open the create user form." },
+        { "seq": 6, "action": "info", "target": null, "value": "Fill in the user details: name, email, and role assignment. Sensitive data like email is stored securely in the PII Vault.", "delay_ms": 0, "narration": "Fill in the user details. Sensitive data like email is stored securely in the PII Vault." },
+        { "seq": 7, "action": "highlight", "target": "[data-testid='role-selector']", "value": null, "delay_ms": 1500, "narration": "Assign one or more roles to control what the user can access." },
+        { "seq": 8, "action": "info", "target": null, "value": "That's it! Users can now log in and access features based on their assigned roles.", "delay_ms": 0, "narration": "That's it. Users can now log in and access features based on their assigned roles." }
+      ]
+    },
+    {
+      "id": "DEM-0003",
+      "title": "Organization Management",
+      "description": "Set up and manage organizations, departments, and the org hierarchy tree.",
+      "duration": "2:45",
+      "type": "interactive",
+      "builtin": true,
+      "category": "identity",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "Organizations are the top-level namespace in Zorbit. Let's explore how to manage them.", "delay_ms": 0, "narration": "Organizations are the top-level namespace in Zorbit. Let's explore how to manage them." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/organizations", "value": null, "delay_ms": 500, "narration": "Navigate to the Organizations page." },
+        { "seq": 3, "action": "highlight", "target": "[data-testid='org-tree']", "value": null, "delay_ms": 1000, "narration": "This tree view shows your organization hierarchy." },
+        { "seq": 4, "action": "highlight", "target": "[data-testid='create-org-btn']", "value": null, "delay_ms": 1000, "narration": "Click here to create a child organization or department." },
+        { "seq": 5, "action": "info", "target": null, "value": "Each organization has its own namespace, users, roles, and data isolation.", "delay_ms": 0, "narration": "Each organization has its own namespace, users, roles, and data isolation." },
+        { "seq": 6, "action": "info", "target": null, "value": "Namespace isolation ensures that data in one organization cannot be accessed by another.", "delay_ms": 0, "narration": "Namespace isolation ensures that data in one organization cannot be accessed by another." }
+      ]
+    },
+    {
+      "id": "DEM-0004",
+      "title": "Role & Privilege Assignment",
+      "description": "Create roles, assign privileges, and understand how privilege sections map to menu items.",
+      "duration": "3:30",
+      "type": "interactive",
+      "builtin": true,
+      "category": "admin",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "Roles and privileges control what users can see and do on the platform.", "delay_ms": 0, "narration": "Roles and privileges control what users can see and do on the platform." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/roles", "value": null, "delay_ms": 500, "narration": "Navigate to the Roles page." },
+        { "seq": 3, "action": "highlight", "target": "[data-testid='roles-table']", "value": null, "delay_ms": 1000, "narration": "This table shows all roles defined for your organization." },
+        { "seq": 4, "action": "highlight", "target": "[data-testid='create-role-btn']", "value": null, "delay_ms": 1000, "narration": "Click here to create a new role." },
+        { "seq": 5, "action": "click", "target": "[data-testid='create-role-btn']", "value": null, "delay_ms": 1000, "narration": "Let's create a new role." },
+        { "seq": 6, "action": "info", "target": null, "value": "Give the role a name and description, then assign privileges from the privilege sections.", "delay_ms": 0, "narration": "Give the role a name and description, then assign privileges from the privilege sections." },
+        { "seq": 7, "action": "navigate", "target": "/org/{{org_id}}/privileges", "value": null, "delay_ms": 500, "narration": "Let's look at the available privileges." },
+        { "seq": 8, "action": "highlight", "target": "[data-testid='privilege-sections']", "value": null, "delay_ms": 1000, "narration": "Privileges are organized into sections. Each section maps to a menu category." },
+        { "seq": 9, "action": "info", "target": null, "value": "When a role is assigned a privilege, the corresponding menu item becomes visible to users with that role.", "delay_ms": 0, "narration": "When a role is assigned a privilege, the corresponding menu item becomes visible to users with that role." },
+        { "seq": 10, "action": "info", "target": null, "value": "This is how Zorbit achieves privilege-driven navigation.", "delay_ms": 0, "narration": "This is how Zorbit achieves privilege-driven navigation." }
+      ]
+    },
+    {
+      "id": "DEM-0005",
+      "title": "Navigation Configuration",
+      "description": "Understand how the dynamic menu works, including sections, privileges, and handlebars route templating.",
+      "duration": "2:00",
+      "type": "interactive",
+      "builtin": true,
+      "category": "admin",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "Zorbit generates navigation menus dynamically based on user roles and privileges.", "delay_ms": 0, "narration": "Zorbit generates navigation menus dynamically based on user roles and privileges." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/navigation/menu", "value": null, "delay_ms": 500, "narration": "Navigate to the Menu Configuration page." },
+        { "seq": 3, "action": "highlight", "target": "[data-testid='menu-sections']", "value": null, "delay_ms": 1000, "narration": "These are the menu sections. Each section groups related privileges." },
+        { "seq": 4, "action": "info", "target": null, "value": "Route templates use handlebars syntax like {{org_id}} which are resolved at runtime to the actual organization ID.", "delay_ms": 0, "narration": "Route templates use handlebars syntax. Variables like org ID are resolved at runtime." },
+        { "seq": 5, "action": "info", "target": null, "value": "The menu can fall back to a static configuration if the database is unavailable.", "delay_ms": 0, "narration": "The menu can fall back to a static configuration if the database is unavailable." }
+      ]
+    },
+    {
+      "id": "DEM-0006",
+      "title": "Audit Log Review",
+      "description": "Browse audit logs, filter by time range, and understand the audit event structure.",
+      "duration": "2:15",
+      "type": "interactive",
+      "builtin": true,
+      "category": "admin",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "Every write operation on the platform generates an audit log entry.", "delay_ms": 0, "narration": "Every write operation on the platform generates an audit log entry." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/audit/logs", "value": null, "delay_ms": 500, "narration": "Navigate to the Audit Logs page." },
+        { "seq": 3, "action": "highlight", "target": "[data-testid='audit-table']", "value": null, "delay_ms": 1000, "narration": "This table shows all audit events for your organization." },
+        { "seq": 4, "action": "highlight", "target": "[data-testid='time-range-filter']", "value": null, "delay_ms": 1000, "narration": "Use the time range filter to narrow down results." },
+        { "seq": 5, "action": "highlight", "target": "[data-testid='event-type-filter']", "value": null, "delay_ms": 1000, "narration": "Filter by event type to find specific actions." },
+        { "seq": 6, "action": "info", "target": null, "value": "Each audit entry includes the actor, action, timestamp, and a correlation ID for distributed tracing.", "delay_ms": 0, "narration": "Each audit entry includes the actor, action, timestamp, and a correlation ID for distributed tracing." }
+      ]
+    },
+    {
+      "id": "DEM-0007",
+      "title": "PII Vault Operations",
+      "description": "Learn how sensitive data is tokenized and stored securely in the PII Vault.",
+      "duration": "2:45",
+      "type": "interactive",
+      "builtin": true,
+      "category": "admin",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "The PII Vault stores sensitive personal data separately from operational databases. Only tokens are stored in application tables.", "delay_ms": 0, "narration": "The PII Vault stores sensitive personal data separately from operational databases." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/pii/tokens", "value": null, "delay_ms": 500, "narration": "Navigate to the Token Explorer." },
+        { "seq": 3, "action": "highlight", "target": "[data-testid='token-table']", "value": null, "delay_ms": 1000, "narration": "This table shows PII tokens. The actual sensitive data is encrypted in the vault." },
+        { "seq": 4, "action": "info", "target": null, "value": "When a user is created, their email, phone, and other PII fields are tokenized automatically.", "delay_ms": 0, "narration": "When a user is created, their email and phone are tokenized automatically." },
+        { "seq": 5, "action": "info", "target": null, "value": "Example: email_token PII-92AF maps to the real email stored in the vault.", "delay_ms": 0, "narration": "For example, a PII token maps to the real email stored securely in the vault." },
+        { "seq": 6, "action": "navigate", "target": "/org/{{org_id}}/pii/status", "value": null, "delay_ms": 500, "narration": "The Vault Status page shows health and statistics." },
+        { "seq": 7, "action": "info", "target": null, "value": "Raw PII must never appear in operational databases, logs, or API responses.", "delay_ms": 0, "narration": "Raw PII must never appear in operational databases, logs, or API responses." }
+      ]
+    },
+    {
+      "id": "DEM-0008",
+      "title": "Messaging & Events",
+      "description": "Explore the event-driven messaging system, topics, subscriptions, and the canonical event envelope.",
+      "duration": "3:00",
+      "type": "interactive",
+      "builtin": true,
+      "category": "admin",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "Zorbit services communicate asynchronously through Kafka events.", "delay_ms": 0, "narration": "Zorbit services communicate asynchronously through Kafka events." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/messaging/events", "value": null, "delay_ms": 500, "narration": "Navigate to the Event Explorer." },
+        { "seq": 3, "action": "highlight", "target": "[data-testid='event-list']", "value": null, "delay_ms": 1000, "narration": "This shows recent events flowing through the platform." },
+        { "seq": 4, "action": "info", "target": null, "value": "Events follow the naming convention: domain.entity.action (e.g. identity.user.created).", "delay_ms": 0, "narration": "Events follow the naming convention domain dot entity dot action." },
+        { "seq": 5, "action": "navigate", "target": "/org/{{org_id}}/messaging/topics", "value": null, "delay_ms": 500, "narration": "Let's look at the Kafka topics." },
+        { "seq": 6, "action": "highlight", "target": "[data-testid='topics-table']", "value": null, "delay_ms": 1000, "narration": "Each service has its own topic for publishing events." },
+        { "seq": 7, "action": "navigate", "target": "/org/{{org_id}}/messaging/subscriptions", "value": null, "delay_ms": 500, "narration": "Subscriptions show which services consume which events." },
+        { "seq": 8, "action": "info", "target": null, "value": "Every event uses the canonical event envelope with correlation IDs for distributed tracing.", "delay_ms": 0, "narration": "Every event uses the canonical event envelope with correlation IDs for distributed tracing." }
+      ]
+    },
+    {
+      "id": "DEM-0009",
+      "title": "Dashboard Designer",
+      "description": "Create and configure dashboard widgets, set role-based visibility, and arrange the layout.",
+      "duration": "3:15",
+      "type": "interactive",
+      "builtin": true,
+      "category": "admin",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "The Dashboard Designer lets you create and arrange widgets for your organization's dashboard.", "delay_ms": 0, "narration": "The Dashboard Designer lets you create and arrange widgets for your organization's dashboard." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/dashboard/designer", "value": null, "delay_ms": 500, "narration": "Navigate to the Dashboard Designer." },
+        { "seq": 3, "action": "highlight", "target": "[data-testid='widget-grid']", "value": null, "delay_ms": 1000, "narration": "This is the widget grid. You can drag and drop widgets to rearrange them." },
+        { "seq": 4, "action": "highlight", "target": "[data-testid='add-widget-btn']", "value": null, "delay_ms": 1000, "narration": "Click here to add a new widget." },
+        { "seq": 5, "action": "click", "target": "[data-testid='add-widget-btn']", "value": null, "delay_ms": 1000, "narration": "Let's add a widget." },
+        { "seq": 6, "action": "info", "target": null, "value": "Choose a widget type: Count, Chart, Table, List, or Gauge. Each type has its own configuration options.", "delay_ms": 0, "narration": "Choose a widget type. Each type has its own configuration options." },
+        { "seq": 7, "action": "info", "target": null, "value": "Set the metric query to define where the widget gets its data. Use API path templates with handlebars variables.", "delay_ms": 0, "narration": "Set the metric query to define where the widget gets its data." },
+        { "seq": 8, "action": "info", "target": null, "value": "Assign roles to control which users can see this widget. Leave empty for all users.", "delay_ms": 0, "narration": "Assign roles to control which users can see this widget." },
+        { "seq": 9, "action": "info", "target": null, "value": "Save the layout and switch to view mode to see how the dashboard appears to users.", "delay_ms": 0, "narration": "Save the layout and switch to view mode to see how the dashboard appears to users." }
+      ]
+    },
+    {
+      "id": "DEM-000A",
+      "title": "Quick Start Onboarding",
+      "description": "A fast-paced overview of the entire platform for new administrators. Covers all major sections in under 3 minutes.",
+      "duration": "3:00",
+      "type": "interactive",
+      "builtin": true,
+      "category": "onboarding",
+      "tts_enabled": true,
+      "steps": [
+        { "seq": 1, "action": "info", "target": null, "value": "Welcome to the Zorbit Quick Start! This overview covers all major platform sections.", "delay_ms": 0, "narration": "Welcome to the Zorbit Quick Start. This overview covers all major platform sections." },
+        { "seq": 2, "action": "navigate", "target": "/org/{{org_id}}/dashboard", "value": null, "delay_ms": 500, "narration": "Dashboard: your command center with configurable widgets." },
+        { "seq": 3, "action": "navigate", "target": "/org/{{org_id}}/users", "value": null, "delay_ms": 2000, "narration": "Identity: manage users, organizations, and authentication providers." },
+        { "seq": 4, "action": "navigate", "target": "/org/{{org_id}}/roles", "value": null, "delay_ms": 2000, "narration": "Authorization: define roles and assign privileges to control access." },
+        { "seq": 5, "action": "navigate", "target": "/org/{{org_id}}/audit/logs", "value": null, "delay_ms": 2000, "narration": "Audit: every action is logged with full traceability." },
+        { "seq": 6, "action": "navigate", "target": "/org/{{org_id}}/pii/tokens", "value": null, "delay_ms": 2000, "narration": "PII Vault: sensitive data is tokenized and stored securely." },
+        { "seq": 7, "action": "navigate", "target": "/org/{{org_id}}/messaging/events", "value": null, "delay_ms": 2000, "narration": "Messaging: services communicate through Kafka events." },
+        { "seq": 8, "action": "navigate", "target": "/org/{{org_id}}/products", "value": null, "delay_ms": 2000, "narration": "Products: business modules like the Product Configurator live here." },
+        { "seq": 9, "action": "navigate", "target": "/org/{{org_id}}/settings/general", "value": null, "delay_ms": 2000, "narration": "Settings: configure your organization's preferences and integrations." },
+        { "seq": 10, "action": "info", "target": null, "value": "That's the quick tour! Explore each section in detail using the sidebar menu. Check out the other demo segments for deeper walkthroughs.", "delay_ms": 0, "narration": "That's the quick tour. Explore each section in detail using the sidebar menu." }
+      ]
+    }
+  ]
+}

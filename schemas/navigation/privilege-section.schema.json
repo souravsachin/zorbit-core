@@ -1,0 +1,56 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/navigation/privilege-section.schema.json",
+  "title": "Zorbit Privilege Section",
+  "description": "Schema for privilege sections that group related privileges in the navigation menu. Each section represents a top-level menu category (e.g. Dashboard, Identity, Admin).",
+  "type": "object",
+  "required": ["id", "section_code", "section_label", "seq_number"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique section identifier using short hash format.",
+      "pattern": "^SEC-[A-F0-9]{4,8}$",
+      "examples": ["SEC-01A1", "SEC-B2C3"]
+    },
+    "section_code": {
+      "type": "string",
+      "description": "Machine-readable section code. Used as a stable reference key.",
+      "pattern": "^[a-z][a-z0-9_]*$",
+      "examples": ["dashboard", "identity", "authorization", "products"]
+    },
+    "section_label": {
+      "type": "string",
+      "description": "Human-readable display label for the section.",
+      "examples": ["Dashboard", "Identity", "Authorization", "Products"]
+    },
+    "icon": {
+      "type": "string",
+      "description": "Material Icon name for the section.",
+      "examples": ["dashboard", "people", "security", "inventory_2"]
+    },
+    "seq_number": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Display order of the section in the navigation menu. Lower numbers appear first.",
+      "examples": [1, 2, 3]
+    },
+    "visible": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether this section is visible in the navigation menu."
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the section was created.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of the last update.",
+      "examples": ["2026-03-12T10:00:00.000Z"]
+    }
+  },
+  "additionalProperties": false
+}

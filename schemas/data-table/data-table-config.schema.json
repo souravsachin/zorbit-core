@@ -1,0 +1,385 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://schemas.zorbit-platform.com/data-table/data-table-config.schema.json",
+  "title": "Zorbit Data Table Configuration",
+  "description": "Schema for configurable data tables used across business modules. Defines columns, filters, sorting, export, and data source configuration for the ZorbitDataTable component.",
+  "type": "object",
+  "required": ["columns", "data_source"],
+  "properties": {
+    "columns": {
+      "type": "array",
+      "description": "Column definitions for the data table.",
+      "items": {
+        "$ref": "#/definitions/column_def"
+      }
+    },
+    "filters": {
+      "type": "array",
+      "description": "Filter definitions. If omitted, filters are auto-detected from column data types.",
+      "items": {
+        "$ref": "#/definitions/filter_def"
+      }
+    },
+    "time_range_presets": {
+      "type": "array",
+      "description": "Time range preset buttons displayed above the table.",
+      "default": [
+        { "label": "1D", "value": "1d", "duration_hours": 24 },
+        { "label": "7D", "value": "7d", "duration_hours": 168 },
+        { "label": "30D", "value": "30d", "duration_hours": 720 },
+        { "label": "ALL", "value": "all", "duration_hours": null }
+      ],
+      "items": {
+        "$ref": "#/definitions/time_range_preset"
+      }
+    },
+    "summary_stats": {
+      "type": "array",
+      "description": "Summary statistics cards displayed above the table.",
+      "items": {
+        "$ref": "#/definitions/summary_stat"
+      }
+    },
+    "view_modes": {
+      "type": "array",
+      "description": "Available view modes for the table.",
+      "default": ["list"],
+      "items": {
+        "type": "string",
+        "enum": ["list", "grid"]
+      }
+    },
+    "export_formats": {
+      "type": "array",
+      "description": "Available export formats.",
+      "default": ["csv"],
+      "items": {
+        "type": "string",
+        "enum": ["csv", "excel"]
+      }
+    },
+    "sortable": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether column headers are sortable."
+    },
+    "searchable": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether the global search input is shown."
+    },
+    "page_sizes": {
+      "type": "array",
+      "description": "Available page size options for pagination.",
+      "default": [10, 25, 50, 100],
+      "items": {
+        "type": "integer",
+        "minimum": 1
+      }
+    },
+    "default_page_size": {
+      "type": "integer",
+      "default": 25,
+      "description": "Default number of rows per page."
+    },
+    "default_sort_column": {
+      "type": "string",
+      "description": "Column name to sort by default.",
+      "examples": ["created_at", "name"]
+    },
+    "default_sort_direction": {
+      "type": "string",
+      "enum": ["asc", "desc"],
+      "default": "desc",
+      "description": "Default sort direction."
+    },
+    "row_click_action": {
+      "type": "string",
+      "description": "Route template to navigate to when a row is clicked. Uses handlebars syntax.",
+      "examples": ["/org/{{org_id}}/products/{{id}}", "/org/{{org_id}}/users/{{id}}"]
+    },
+    "empty_state_message": {
+      "type": "string",
+      "default": "No results found.",
+      "description": "Message displayed when the table has no data."
+    },
+    "data_source": {
+      "$ref": "#/definitions/data_source",
+      "description": "Configuration for how the table fetches data."
+    }
+  },
+  "additionalProperties": false,
+  "definitions": {
+    "column_def": {
+      "type": "object",
+      "required": ["name", "label", "type"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Data field name (maps to JSON response key).",
+          "examples": ["id", "name", "status", "created_at"]
+        },
+        "label": {
+          "type": "string",
+          "description": "Column header display label.",
+          "examples": ["ID", "Name", "Status", "Created"]
+        },
+        "type": {
+          "type": "string",
+          "enum": ["string", "number", "date", "datetime", "boolean", "enum", "badge", "currency", "link"],
+          "description": "Column data type. Determines rendering and auto-filter type detection."
+        },
+        "visible": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether the column is visible by default."
+        },
+        "sortable": {
+          "type": "boolean",
+          "default": true,
+          "description": "Whether this column can be sorted."
+        },
+        "filterable": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this column has a filter control."
+        },
+        "pii_sensitive": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this column contains PII data. If true, values are masked unless the user has detokenize privilege."
+        },
+        "width": {
+          "type": "string",
+          "description": "Column width (CSS value).",
+          "examples": ["100px", "15%", "auto"]
+        },
+        "align": {
+          "type": "string",
+          "enum": ["left", "center", "right"],
+          "default": "left",
+          "description": "Column text alignment."
+        },
+        "enum_values": {
+          "type": "array",
+          "description": "Allowed values for enum-type columns. Used for filter dropdowns and badge rendering.",
+          "items": {
+            "type": "object",
+            "required": ["value", "label"],
+            "properties": {
+              "value": {
+                "type": "string",
+                "description": "Enum value."
+              },
+              "label": {
+                "type": "string",
+                "description": "Display label."
+              },
+              "color": {
+                "type": "string",
+                "description": "Badge color for this value.",
+                "examples": ["#4CAF50", "#FFC107", "#F44336", "success", "warning", "error"]
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "format": {
+          "type": "string",
+          "description": "Display format string. For dates: 'YYYY-MM-DD', 'relative'. For currency: 'USD', 'EUR'.",
+          "examples": ["YYYY-MM-DD HH:mm", "relative", "USD"]
+        },
+        "truncate": {
+          "type": "integer",
+          "description": "Maximum characters to display before truncating with ellipsis.",
+          "examples": [50, 100]
+        }
+      },
+      "additionalProperties": false
+    },
+    "filter_def": {
+      "type": "object",
+      "required": ["column", "type"],
+      "properties": {
+        "column": {
+          "type": "string",
+          "description": "Column name this filter applies to."
+        },
+        "type": {
+          "type": "string",
+          "enum": ["search", "multiselect", "range", "daterange", "boolean", "custom"],
+          "description": "Filter UI type. Auto-detected from column type if not specified: enum->multiselect, number->range, string->search, date->daterange."
+        },
+        "label": {
+          "type": "string",
+          "description": "Filter label. Defaults to column label if omitted."
+        },
+        "placeholder": {
+          "type": "string",
+          "description": "Placeholder text for the filter input.",
+          "examples": ["Search by name...", "Select status"]
+        },
+        "options": {
+          "type": "array",
+          "description": "Options for multiselect filters. If omitted for enum columns, auto-populated from column enum_values.",
+          "items": {
+            "type": "object",
+            "required": ["value", "label"],
+            "properties": {
+              "value": {
+                "type": "string"
+              },
+              "label": {
+                "type": "string"
+              }
+            },
+            "additionalProperties": false
+          }
+        },
+        "min": {
+          "type": "number",
+          "description": "Minimum value for range filters."
+        },
+        "max": {
+          "type": "number",
+          "description": "Maximum value for range filters."
+        },
+        "default_value": {
+          "description": "Default filter value applied on initial load."
+        }
+      },
+      "additionalProperties": false
+    },
+    "time_range_preset": {
+      "type": "object",
+      "required": ["label", "value"],
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Button display label.",
+          "examples": ["1D", "7D", "30D", "ALL"]
+        },
+        "value": {
+          "type": "string",
+          "description": "Machine-readable preset key.",
+          "examples": ["1d", "7d", "30d", "all"]
+        },
+        "duration_hours": {
+          "type": ["integer", "null"],
+          "description": "Duration in hours from now. Null means no time limit (ALL).",
+          "examples": [24, 168, 720, null]
+        }
+      },
+      "additionalProperties": false
+    },
+    "summary_stat": {
+      "type": "object",
+      "required": ["key", "label"],
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "Stat key. Built-in keys: 'total', 'page_count', 'active_filters', 'locked'. Custom keys resolved from API response.",
+          "examples": ["total", "page_count", "active_filters", "locked"]
+        },
+        "label": {
+          "type": "string",
+          "description": "Display label for the stat card.",
+          "examples": ["Total Results", "This Page", "Active Filters", "Locked"]
+        },
+        "icon": {
+          "type": "string",
+          "description": "Material Icon name.",
+          "examples": ["functions", "view_list", "filter_alt", "lock"]
+        },
+        "color": {
+          "type": "string",
+          "description": "Stat card color.",
+          "examples": ["primary", "info", "warning", "error"]
+        }
+      },
+      "additionalProperties": false
+    },
+    "data_source": {
+      "type": "object",
+      "required": ["endpoint_template"],
+      "properties": {
+        "endpoint_template": {
+          "type": "string",
+          "description": "API endpoint template with handlebars variables. Resolved at runtime.",
+          "examples": [
+            "/api/v1/O/{{org_id}}/products",
+            "/api/v1/O/{{org_id}}/audit/logs",
+            "/api/v1/O/{{org_id}}/users"
+          ]
+        },
+        "method": {
+          "type": "string",
+          "enum": ["GET", "POST"],
+          "default": "GET",
+          "description": "HTTP method for data fetch. Use POST for complex filter payloads."
+        },
+        "query_params": {
+          "type": "object",
+          "description": "Static query parameters appended to every request.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "examples": [{ "include": "relations", "status": "active" }]
+        },
+        "response_data_path": {
+          "type": "string",
+          "default": "data",
+          "description": "JSON path to the data array in the API response.",
+          "examples": ["data", "results", "items"]
+        },
+        "response_total_path": {
+          "type": "string",
+          "default": "total",
+          "description": "JSON path to the total count in the API response.",
+          "examples": ["total", "meta.total", "pagination.total"]
+        },
+        "page_param": {
+          "type": "string",
+          "default": "page",
+          "description": "Query parameter name for page number."
+        },
+        "page_size_param": {
+          "type": "string",
+          "default": "limit",
+          "description": "Query parameter name for page size."
+        },
+        "sort_param": {
+          "type": "string",
+          "default": "sort",
+          "description": "Query parameter name for sort field."
+        },
+        "sort_dir_param": {
+          "type": "string",
+          "default": "order",
+          "description": "Query parameter name for sort direction."
+        },
+        "search_param": {
+          "type": "string",
+          "default": "search",
+          "description": "Query parameter name for global search."
+        },
+        "time_range_param": {
+          "type": "string",
+          "default": "time_range",
+          "description": "Query parameter name for time range preset."
+        },
+        "date_from_param": {
+          "type": "string",
+          "default": "from",
+          "description": "Query parameter name for custom date range start."
+        },
+        "date_to_param": {
+          "type": "string",
+          "default": "to",
+          "description": "Query parameter name for custom date range end."
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
