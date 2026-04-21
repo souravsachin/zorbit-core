@@ -1,0 +1,164 @@
+{
+  "moduleId": "zorbit-app-sample_rates",
+  "moduleName": "Sample Rates",
+  "moduleType": "app",
+  "version": "1.0.0",
+
+  "placement": {
+    "scaffold": "Business",
+    "scaffoldSortOrder": 30,
+    "edition": {
+      "name": "Health Insurance",
+      "category": "Insurer",
+      "categorySortOrder": 10,
+      "sortOrder": 10,
+      "icon": "Heart",
+      "iconBg": "#dcfce7",
+      "iconColor": "#15803d",
+      "iconRing": "#86efac"
+    },
+    "businessLine": "Distribution",
+    "capabilityArea": "Rate Management",
+    "sortOrder": 10
+  },
+
+  "registration": {
+    "kafkaTopic": "platform-module-announcements",
+    "manifestUrl": "composition-only"
+  },
+
+  "navigation": {
+    "sections": [
+      {
+        "id": "sample-rates-main",
+        "label": "Sample Rates",
+        "items": [
+          {
+            "label": "Rate cards",
+            "feRoute": "/m/sample-rates/rate-cards/list",
+            "feComponent": "CompositionRenderer",
+            "icon": "list",
+            "privilege": "sample_rates.rate-cards.read"
+          },
+          {
+            "label": "New rate card",
+            "feRoute": "/m/sample-rates/rate-cards/new",
+            "feComponent": "CompositionRenderer",
+            "icon": "plus",
+            "privilege": "sample_rates.rate-cards.create"
+          },
+          {
+            "label": "Test data",
+            "feRoute": "/m/sample-rates/test-data/list",
+            "feComponent": "CompositionRenderer",
+            "icon": "database",
+            "privilege": "sample_rates.test-data.read"
+          },
+          {
+            "label": "New test record",
+            "feRoute": "/m/sample-rates/test-data/new",
+            "feComponent": "CompositionRenderer",
+            "icon": "plus",
+            "privilege": "sample_rates.test-data.create"
+          }
+        ]
+      }
+    ]
+  },
+
+  "guide": {
+    "intro": {
+      "headline": "Sample composition-only module",
+      "summary": "Rate Cards and Test Data resources assembled from PFS building blocks (white-label + form_builder + datatable + doc_generator). No backend code.",
+      "feRoute": "/m/sample-rates/guide/intro"
+    },
+    "slides": {
+      "feRoute": "/m/sample-rates/guide/presentation",
+      "deck": [
+        { "title": "What this proves", "body": "A module can be defined entirely by manifest." },
+        { "title": "Composition", "body": "cosmetics + resources -> new/list/details views." },
+        { "title": "No code shipped", "body": "Unified console orchestrates PFS SDKs." }
+      ]
+    },
+    "lifecycle": {
+      "feRoute": "/m/sample-rates/guide/lifecycle",
+      "phases": [
+        { "name": "Draft", "description": "Author a rate card." },
+        { "name": "Active", "description": "Available to quote." },
+        { "name": "Retired", "description": "Archived; read-only." }
+      ]
+    },
+    "videos": { "feRoute": "/m/sample-rates/guide/videos", "entries": [] },
+    "docs": {
+      "feRoute": "/m/sample-rates/guide/resources",
+      "links": [{ "label": "US-MX-2095 spec", "href": "/m/sample-rates/guide/us-mx-2095" }]
+    },
+    "pricing": {
+      "feRoute": "/m/sample-rates/guide/pricing",
+      "tiers": [
+        { "name": "Community", "monthlyPrice": 0, "features": ["Unlimited rate cards"] },
+        { "name": "Business", "monthlyPrice": 49, "features": ["Export to PDF", "Email support"] },
+        { "name": "Enterprise", "monthlyPrice": null, "features": ["Dedicated CSM", "SLA"] }
+      ]
+    }
+  },
+
+  "deployments": {
+    "health": { "beRoute": "/api/module-registry/api/v1/G/health" },
+    "build": {
+      "commitSha": "composition-only",
+      "builtAt": "2026-04-19T22:00:00Z",
+      "nodeVersion": "n/a",
+      "dockerImage": "n/a"
+    },
+    "environments": [
+      { "name": "uat", "url": "https://zorbit-uat.onezippy.ai", "status": "healthy" }
+    ],
+    "runbook": { "href": "/m/sample-rates/deployments/runbook" }
+  },
+
+  "composition": {
+    "cosmetics": {
+      "whitelabel": { "id": "WL-TEST1" }
+    },
+    "resources": {
+      "rate-cards": {
+        "new": {
+          "formBuilder": { "templateId": "FRM-3C9D" }
+        },
+        "list": {
+          "datatable": {
+            "pageId": "DT-1E2F",
+            "fields": ["code", "effectiveFrom", "tier", "premium"],
+            "sortBy": [{ "field": "effectiveFrom", "order": "desc" }],
+            "lookups": {
+              "tier": {
+                "datatableId": "DT-TIER01",
+                "labelField": "name",
+                "valueField": "code"
+              }
+            },
+            "actions": { "export": { "csv": true, "pdf": false } }
+          }
+        },
+        "details": {
+          "datatable": {
+            "pageId": "DT-1E2G",
+            "actions": { "export": { "pdf": true } }
+          }
+        }
+      },
+      "test-data": {
+        "new": {
+          "formBuilder": { "templateId": "FRM-9A8B" }
+        },
+        "list": {
+          "datatable": {
+            "pageId": "DT-TEST1",
+            "actions": { "export": { "csv": true, "pdf": true } }
+          }
+        }
+      }
+    }
+  }
+}

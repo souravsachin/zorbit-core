@@ -1,0 +1,173 @@
+{
+  "moduleId": "app_example_module",
+  "moduleName": "Example Module",
+  "moduleType": "app",
+  "version": "1.0.0",
+  "description": "Reference example showing all v2 manifest fields. Replace with your module's actual values.",
+  "owner": "Platform Architecture",
+  "icon": "widgets",
+  "color": "#6366f1",
+
+  "placement": {
+    "edition": "insurer",
+    "businessLine": "distribution",
+    "capabilityArea": "product-management",
+    "sortOrder": 10
+  },
+
+  "registration": {
+    "kafkaTopic": "platform.module.announcements",
+    "manifestUrl": "https://cdn.onezippy.ai/modules/example-module/zorbit-module-manifest.json"
+  },
+
+  "navigation": {
+    "sections": [
+      {
+        "label": "Example Module",
+        "icon": "widgets",
+        "sortOrder": 50,
+        "privilege": "example_module.view",
+        "items": [
+          {
+            "label": "Overview",
+            "feRoute": "/m/example-module/overview",
+            "beRoute": "/api/v1/G/health",
+            "privilege": "example_module.overview",
+            "sortOrder": 1,
+            "icon": "info"
+          },
+          {
+            "label": "Configurations",
+            "feRoute": "/m/example-module/configs",
+            "beRoute": "/api/v1/O/{{org_id}}/example-module/configs",
+            "privilege": "example_module.configs.read",
+            "sortOrder": 2,
+            "icon": "settings"
+          },
+          {
+            "label": "Reference Library",
+            "feRoute": "/m/example-module/refs",
+            "beRoute": "/api/v1/O/{{org_id}}/example-module/refs",
+            "privilege": "example_module.refs.read",
+            "sortOrder": 3,
+            "icon": "library_books"
+          },
+          {
+            "label": "Setup",
+            "feRoute": "/m/example-module/setup",
+            "beRoute": "/api/v1/O/{{org_id}}/example-module/setup/stats",
+            "privilege": "example_module.setup.admin",
+            "sortOrder": 4,
+            "icon": "tune"
+          }
+        ]
+      }
+    ]
+  },
+
+  "frontend": {
+    "bundleUrl": "https://cdn.onezippy.ai/modules/example-module/1.0.0/bundle.js",
+    "loadStrategy": "lazy",
+    "entryComponent": "ExampleModuleApp",
+    "routes": [
+      "/m/example-module/*"
+    ]
+  },
+
+  "backend": {
+    "baseUrl": "http://localhost:3100",
+    "healthEndpoint": "/api/v1/G/health",
+    "apiPrefix": "/api/v1/O/{orgId}/example-module",
+    "endpoints": [
+      { "method": "GET",    "path": "/configs",       "privilege": "example_module.configs.read",   "description": "List all configurations" },
+      { "method": "POST",   "path": "/configs",       "privilege": "example_module.configs.create", "description": "Create a configuration" },
+      { "method": "GET",    "path": "/configs/:id",   "privilege": "example_module.configs.read",   "description": "Get one configuration" },
+      { "method": "PUT",    "path": "/configs/:id",   "privilege": "example_module.configs.update", "description": "Replace a configuration" },
+      { "method": "DELETE", "path": "/configs/:id",   "privilege": "example_module.configs.delete", "description": "Delete a configuration" },
+      { "method": "PATCH",  "path": "/configs/:id/status", "privilege": "example_module.configs.update", "description": "Transition config status" },
+      { "method": "GET",    "path": "/refs",          "privilege": "example_module.refs.read",      "description": "List reference items" }
+    ]
+  },
+
+  "dashboard": {
+    "widgets": [
+      {
+        "widgetId": "example-module-total",
+        "type": "kpi",
+        "tier": 1,
+        "label": "Total Configurations",
+        "dataEndpoint": "/api/v1/O/{orgId}/example-module/dashboard/total",
+        "refreshIntervalSeconds": 60,
+        "privilege": "example_module.dashboard.view"
+      }
+    ]
+  },
+
+  "reporting": {
+    "dataSources": [
+      {
+        "sourceId": "example_configs",
+        "label": "Example Configurations",
+        "description": "All configurations for reporting",
+        "fields": [
+          { "field": "hashId",    "label": "Config ID", "type": "string",   "filterable": true, "sortable": true },
+          { "field": "name",      "label": "Name",      "type": "string",   "filterable": true, "sortable": true },
+          { "field": "status",    "label": "Status",    "type": "enum",     "filterable": true, "values": ["draft", "published", "archived"] },
+          { "field": "createdAt", "label": "Created",   "type": "datetime", "filterable": true, "sortable": true }
+        ],
+        "dataEndpoint": "/api/v1/O/{orgId}/example-module/reporting/configs",
+        "exportFormats": ["csv", "xlsx"]
+      }
+    ],
+    "schedulable": false
+  },
+
+  "seeding": {
+    "seedEndpoint": "/api/v1/G/example-module/seed",
+    "flushEndpoint": "/api/v1/G/example-module/flush",
+    "profiles": {
+      "system-minimum": { "description": "Minimal reference data only", "records": 0 },
+      "demo":           { "description": "5 sample configurations",      "records": 5 }
+    },
+    "dependencies": []
+  },
+
+  "events": {
+    "publishes": [
+      "example_module.config.created",
+      "example_module.config.updated",
+      "example_module.config.published"
+    ],
+    "subscribes": [
+      "identity.user.created"
+    ]
+  },
+
+  "database": {
+    "type": "postgresql",
+    "name": "zorbit_example_module",
+    "collections": ["configs", "config_items"]
+  },
+
+  "dependencies": {
+    "platform": [
+      "zorbit-identity",
+      "zorbit-authorization",
+      "zorbit-event_bus"
+    ],
+    "business": []
+  },
+
+  "pii": {
+    "autoDetect": false,
+    "declaredFields": []
+  },
+
+  "analytics": {
+    "grafanaDashboard": "example-module-ops",
+    "metrics": [
+      { "name": "example_module_configs_total", "type": "counter",   "labels": ["status", "org"] },
+      { "name": "example_module_active_count",  "type": "gauge",     "labels": ["org"] }
+    ]
+  }
+}

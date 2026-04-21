@@ -22,3 +22,6 @@ Thumbs.db
 # Build
 dist/
 build/
+
+# Local seed secrets (contains plaintext passwords)
+super_admin.json

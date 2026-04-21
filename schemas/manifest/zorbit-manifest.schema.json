@@ -1,0 +1,141 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://zorbit.scalatics.com/schemas/manifest/zorbit-manifest.schema.json",
+  "title": "Zorbit Module Manifest",
+  "description": "Declares a module's identity, menu items, privileges, events, and health endpoint for platform integration.",
+  "type": "object",
+  "required": ["module", "menu", "privileges", "events", "health"],
+  "properties": {
+    "module": {
+      "type": "object",
+      "description": "Module identity and metadata.",
+      "required": ["id", "code", "name", "version", "suite"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^MOD-[A-Z0-9]{4}$",
+          "description": "Short hash identifier for the module."
+        },
+        "code": {
+          "type": "string",
+          "description": "Dot-separated hierarchical code, e.g. 'products.rating'."
+        },
+        "name": {
+          "type": "string",
+          "description": "Human-readable module name."
+        },
+        "version": {
+          "type": "string",
+          "pattern": "^\\d+\\.\\d+\\.\\d+$",
+          "description": "SemVer version."
+        },
+        "suite": {
+          "type": "string",
+          "description": "Parent suite/edition the module belongs to."
+        },
+        "category": {
+          "type": "string",
+          "description": "Business line or capability area."
+        }
+      }
+    },
+    "menu": {
+      "type": "object",
+      "description": "Menu items this module contributes to the navigation sidebar.",
+      "required": ["section", "items"],
+      "properties": {
+        "section": {
+          "type": "string",
+          "description": "Section code this module's items belong to."
+        },
+        "section_id": {
+          "type": "string",
+          "description": "Section hashId (e.g. SEC-PR01)."
+        },
+        "section_label": {
+          "type": "string",
+          "description": "Display label for the section."
+        },
+        "section_icon": {
+          "type": "string",
+          "description": "Material Design icon name for the section."
+        },
+        "section_seq": {
+          "type": "integer",
+          "description": "Sort order for the section. Supports negative indexing (-1 = last)."
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "code", "label", "icon", "fe_route", "be_route", "seq"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "description": "Menu item hashId (e.g. PRV-PR01)."
+              },
+              "code": {
+                "type": "string",
+                "description": "Privilege code for this menu item."
+              },
+              "label": {
+                "type": "string",
+                "description": "Display label."
+              },
+              "icon": {
+                "type": "string",
+                "description": "Material Design icon name."
+              },
+              "fe_route": {
+                "type": "string",
+                "description": "Frontend route path (e.g. /app/pcg4/configurations)."
+              },
+              "be_route": {
+                "type": "string",
+                "description": "Backend API route with Handlebars templates (e.g. /api/app/pcg4/v1/O/{{org_id}}/configurations)."
+              },
+              "seq": {
+                "type": "integer",
+                "description": "Sort order within the section. Supports negative indexing."
+              },
+              "privileges": {
+                "type": "array",
+                "items": { "type": "string" },
+                "description": "Privilege codes required to see this item."
+              },
+              "visible_in_menu": {
+                "type": "boolean",
+                "default": true,
+                "description": "Whether this item appears in the navigation menu."
+              }
+            }
+          }
+        }
+      }
+    },
+    "privileges": {
+      "type": "array",
+      "items": { "type": "string" },
+      "description": "All privilege codes this module registers."
+    },
+    "events": {
+      "type": "object",
+      "properties": {
+        "publishes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Events this module publishes (domain.entity.action format)."
+        },
+        "consumes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Events this module consumes."
+        }
+      }
+    },
+    "health": {
+      "type": "string",
+      "description": "Health check endpoint path."
+    }
+  }
+}
