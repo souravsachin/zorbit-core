@@ -25,6 +25,8 @@ environments:
     default_host: "zorbit-dev.onezippy.ai"
     port_base: 3100            # service ports start here
     container_prefix: "ze"     # e = dev per naming convention
+    service_account: "zorbit-dev"       # per-env isolation (owner 2026-04-23)
+    install_dir: "/home/zorbit-dev"     # account home == env eco-system root
     shared_tpms: [superset, odoo-shared, keycloak-shared, jitsi-shared]
     auto_deploy: true
     auto_seed_demo: true
@@ -40,6 +42,8 @@ environments:
     default_host: "zorbit-qa.onezippy.ai"
     port_base: 3200
     container_prefix: "zq"
+    service_account: "zorbit-qa"
+    install_dir: "/home/zorbit-qa"
     shared_tpms: [superset, odoo-shared, keycloak-shared, jitsi-shared]
     auto_deploy: true
     auto_seed_demo: true
@@ -55,6 +59,8 @@ environments:
     default_host: "zorbit-demo.onezippy.ai"
     port_base: 3300
     container_prefix: "zd"     # demo uses zd- (distinct from dev)
+    service_account: "zorbit-demo"
+    install_dir: "/home/zorbit-demo"
     shared_tpms: [superset, odoo-shared, keycloak-shared]
     auto_deploy: false          # manual promotion only
     auto_seed_demo: true
@@ -70,6 +76,8 @@ environments:
     default_host: "zorbit-uat.onezippy.ai"
     port_base: 3100            # aligned with existing UAT deployment
     container_prefix: "zu"
+    service_account: "zorbit-uat"
+    install_dir: "/home/zorbit-uat"
     shared_tpms: [superset]     # odoo/keycloak dedicated per customer
     auto_deploy: false
     auto_seed_demo: false       # customer-specific data
@@ -85,6 +93,8 @@ environments:
     default_host: "app.onezippy.ai"
     port_base: 3400
     container_prefix: "zp"
+    service_account: "zorbit-prod"
+    install_dir: "/home/zorbit-prod"
     shared_tpms: []                 # all dedicated
     auto_deploy: false
     auto_seed_demo: false
@@ -101,11 +111,19 @@ progression_chain:
   - zorbit-uat
   - zorbit-prod
 
-# Service account used to run bootstrap-env.sh.
+# Service account policy (owner feedback 2026-04-23, flaw 4).
+# Retired: single umbrella account `zorbit-deployer`.
+# Rationale: one account per env gives complete isolation — each account's
+# $HOME is that env's eco-system root, and each account can only touch its
+# own env's resources. Docker group membership still required for CLI use.
 service_accounts:
-  allowed: [zorbit-svc, zorbit-deployer]
-  default: zorbit-deployer
-  home: /home/zorbit-deployer
+  policy: per_environment
+  # Each account is named exactly after its env (see `environments[].service_account`
+  # and `install_dir`). The bootstrap MUST validate `$USER == env.service_account`
+  # before making any state change. There is no fallback account.
   data_root: /opt/zorbit-platform
   snapshots_dir: /opt/zorbit-platform/snapshots
   logs_dir: /var/log/zorbit-platform
+  # `install_dir` is the service account's $HOME. All env resources (cloned
+  # artifact bundles, compose files, journals, generated nginx config) live
+  # under that directory.

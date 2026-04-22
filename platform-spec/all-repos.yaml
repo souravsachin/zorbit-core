@@ -1,13 +1,26 @@
 # Zorbit Repository Manifest
 # ---------------------------------------------------------------------------
-# Authoritative list of all repos bootstrap-env.sh must clone + build.
-# Consumed by: bootstrap-env.sh, promote-env.sh
-# Spec version: 1.0 (2026-04-23)
+# Authoritative list of every Zorbit module. Consumed by:
+#   - zorbit-cli/scripts/bootstrap-env.sh   (compose + nginx generation)
+#   - zorbit-cli/scripts/promote-env.sh     (tier progression)
+#
+# Owner feedback 2026-04-23 (flaw 1): installer MUST NOT git-clone + build.
+# Instead, every runtime repo declares an `image:` pointing at a pre-built
+# container image in the registry. The bootstrap pulls that image and
+# launches it. For air-gapped installs, a tarball bundle supplies the same
+# images via `docker load`.
+#
+# `image:` default pattern: `ghcr.io/souravsachin/<slug>:<tag>`.
+# `<slug>` = repo name (e.g. `zorbit-identity`).
+# `<tag>`  = release version (resolved at install time via env var
+# `ZORBIT_IMAGE_TAG`, default `latest`).
 # ---------------------------------------------------------------------------
 
-schema_version: "1.0"
+schema_version: "1.1"
 updated: "2026-04-23"
 default_remote: "https://github.com/souravsachin"
+default_registry: "ghcr.io/souravsachin"
+default_image_tag: "latest"
 
 # Types:
 #   core        - governance repo, no runtime
@@ -17,6 +30,10 @@ default_remote: "https://github.com/souravsachin"
 #   cli         - CLI tool, no port
 #   app         - business module (ZMB)
 #   portal      - customer/prospect portal (frontend)
+#
+# `image:` presence rule:
+#   - type=service|frontend|app|portal -> image REQUIRED
+#   - type=core|sdk|cli                -> no image (no runtime)
 
 repos:
   # ------------------------------------------------------------------
@@ -38,6 +55,7 @@ repos:
   # ------------------------------------------------------------------
   - name: zorbit-identity
     type: service
+    image: ghcr.io/souravsachin/zorbit-identity:latest
     port: 3001
     required: true
     build: npm
@@ -45,6 +63,7 @@ repos:
     depends_on: [zs-pg]
   - name: zorbit-authorization
     type: service
+    image: ghcr.io/souravsachin/zorbit-authorization:latest
     port: 3002
     required: true
     build: npm
@@ -52,6 +71,7 @@ repos:
     depends_on: [zs-pg, zorbit-identity]
   - name: zorbit-navigation
     type: service
+    image: ghcr.io/souravsachin/zorbit-navigation:latest
     port: 3003
     required: true
     build: npm
@@ -59,12 +79,14 @@ repos:
     depends_on: [zs-pg, zorbit-identity, zorbit-authorization]
   - name: zorbit-event_bus
     type: service
+    image: ghcr.io/souravsachin/zorbit-event_bus:latest
     port: 3004
     required: true
     build: npm
     depends_on: [zs-kafka]
   - name: zorbit-pii-vault
     type: service
+    image: ghcr.io/souravsachin/zorbit-pii-vault:latest
     port: 3005
     required: true
     build: npm
@@ -72,6 +94,7 @@ repos:
     depends_on: [zs-pg, zorbit-identity]
   - name: zorbit-audit
     type: service
+    image: ghcr.io/souravsachin/zorbit-audit:latest
     port: 3006
     required: true
     build: npm
@@ -79,6 +102,7 @@ repos:
     depends_on: [zs-pg, zorbit-event_bus]
   - name: zorbit-cor-module_registry
     type: service
+    image: ghcr.io/souravsachin/zorbit-cor-module_registry:latest
     port: 3020
     required: true
     build: npm
@@ -86,6 +110,7 @@ repos:
     depends_on: [zs-pg, zorbit-event_bus]
   - name: zorbit-cor-deployment_registry
     type: service
+    image: ghcr.io/souravsachin/zorbit-cor-deployment_registry:latest
     port: 3021
     required: true
     build: npm
@@ -93,12 +118,14 @@ repos:
     depends_on: [zs-pg, zorbit-cor-module_registry]
   - name: zorbit-cor-observability
     type: service
+    image: ghcr.io/souravsachin/zorbit-cor-observability:latest
     port: 3022
     required: true
     build: npm
     depends_on: []
   - name: zorbit-cor-secrets_vault
     type: service
+    image: ghcr.io/souravsachin/zorbit-cor-secrets_vault:latest
     port: 3023
     required: true
     build: npm
@@ -110,12 +137,14 @@ repos:
   # ------------------------------------------------------------------
   - name: zorbit-pfs-rtc
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-rtc:latest
     port: 3007
     required: false
     build: npm
     depends_on: [zorbit-identity]
   - name: zorbit-pfs-chat
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-chat:latest
     port: 3008
     required: false
     build: npm
@@ -123,12 +152,14 @@ repos:
     depends_on: [zs-pg, zorbit-identity]
   - name: zorbit-pfs-ai_gateway
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-ai_gateway:latest
     port: 3009
     required: false
     build: npm
     depends_on: [zorbit-identity]
   - name: zorbit-pfs-interaction_recorder
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-interaction_recorder:latest
     port: 3012
     required: false
     build: npm
@@ -136,6 +167,7 @@ repos:
     depends_on: [zs-pg]
   - name: zorbit-pfs-datatable
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-datatable:latest
     port: 3013
     required: false
     build: npm
@@ -143,6 +175,7 @@ repos:
     depends_on: [zs-mongo, zorbit-identity]
   - name: zorbit-pfs-form_builder
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-form_builder:latest
     port: 3014
     required: false
     build: npm
@@ -150,6 +183,7 @@ repos:
     depends_on: [zs-mongo, zorbit-identity]
   - name: zorbit-pfs-verification
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-verification:latest
     port: 3024
     required: false
     build: npm
@@ -157,6 +191,7 @@ repos:
     depends_on: [zs-mongo]
   - name: zorbit-pfs-white_label
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-white_label:latest
     port: 3034
     required: false
     build: npm
@@ -164,6 +199,7 @@ repos:
     depends_on: [zs-mongo]
   - name: zorbit-pfs-zmb_factory
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-zmb_factory:latest
     port: 3035
     required: false
     build: npm
@@ -171,6 +207,7 @@ repos:
     depends_on: [zs-mongo]
   - name: zorbit-pfs-doc_generator
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-doc_generator:latest
     port: 3036
     required: false
     build: npm
@@ -178,12 +215,14 @@ repos:
     needs_chromium: true
   - name: zorbit-pfs-seeder
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-seeder:latest
     port: 3037
     required: false
     build: npm
     depends_on: [zorbit-identity, zorbit-pii-vault]
   - name: zorbit-pfs-notification
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-notification:latest
     port: 3038
     required: false
     build: npm
@@ -191,30 +230,35 @@ repos:
     depends_on: [zs-pg]
   - name: zorbit-pfs-file_storage
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-file_storage:latest
     port: 3039
     required: false
     build: npm
     depends_on: []
   - name: zorbit-pfs-file_viewer
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-file_viewer:latest
     port: 3040
     required: false
     build: npm
     depends_on: [zorbit-pfs-file_storage]
   - name: zorbit-pfs-voice
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-voice:latest
     port: 3041
     required: false
     build: npm
     depends_on: []
   - name: zorbit-pfs-voice_engine
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-voice_engine:latest
     port: 3042
     required: false
     build: npm
     depends_on: [zorbit-pfs-voice]
   - name: zorbit-pfs-payment_gateway
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-payment_gateway:latest
     port: 3043
     required: false
     build: npm
@@ -222,6 +266,7 @@ repos:
     depends_on: [zs-pg]
   - name: zorbit-pfs-workflow_engine
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-workflow_engine:latest
     port: 3044
     required: false
     build: npm
@@ -229,48 +274,56 @@ repos:
     depends_on: [zs-pg]
   - name: zorbit-pfs-analytics_reporting
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-analytics_reporting:latest
     port: 3045
     required: false
     build: npm
     depends_on: []
   - name: zorbit-pfs-api_integration
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-api_integration:latest
     port: 3046
     required: false
     build: npm
     depends_on: []
   - name: zorbit-pfs-integration
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-integration:latest
     port: 3047
     required: false
     build: npm
     depends_on: []
   - name: zorbit-pfs-kyc
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-kyc:latest
     port: 3048
     required: false
     build: npm
     depends_on: [zorbit-pii-vault]
   - name: zorbit-pfs-medical_coding
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-medical_coding:latest
     port: 3049
     required: false
     build: npm
     depends_on: []
   - name: zorbit-pfs-realtime
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-realtime:latest
     port: 3050
     required: false
     build: npm
     depends_on: []
   - name: zorbit-pfs-rpa_integration
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-rpa_integration:latest
     port: 3051
     required: false
     build: npm
     depends_on: []
   - name: zorbit-pfs-secrets
     type: service
+    image: ghcr.io/souravsachin/zorbit-pfs-secrets:latest
     port: 3052
     required: false
     build: npm
@@ -295,6 +348,7 @@ repos:
   # ------------------------------------------------------------------
   - name: zorbit-unified-console
     type: frontend
+    image: ghcr.io/souravsachin/zorbit-unified-console:latest
     port: 3000
     required: true
     build: vite
@@ -305,11 +359,13 @@ repos:
   # ------------------------------------------------------------------
   - name: zorbit-portal-customer
     type: portal
+    image: ghcr.io/souravsachin/zorbit-portal-customer:latest
     port: 3060
     required: false
     build: vite
   - name: zorbit-portal-prospect
     type: portal
+    image: ghcr.io/souravsachin/zorbit-portal-prospect:latest
     port: 3061
     required: false
     build: vite
@@ -319,76 +375,91 @@ repos:
   # ------------------------------------------------------------------
   - name: sample-customer-service
     type: app
+    image: ghcr.io/souravsachin/sample-customer-service:latest
     port: 3010
     required: false
     build: npm
   - name: zorbit-app-pcg4
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-pcg4:latest
     port: 3011
     required: false
     build: npm
   - name: zorbit-app-prospect_portal
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-prospect_portal:latest
     port: 3062
     required: false
     build: vite
   - name: zorbit-app-hi_uw_decisioning
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-hi_uw_decisioning:latest
     port: 3063
     required: false
     build: npm
   - name: zorbit-app-hi_claim_decisioning
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-hi_claim_decisioning:latest
     port: 3064
     required: false
     build: npm
   - name: zorbit-app-hi_claim_initiation
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-hi_claim_initiation:latest
     port: 3065
     required: false
     build: npm
   - name: zorbit-app-hi_claim_adjudication_workflow
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-hi_claim_adjudication_workflow:latest
     port: 3066
     required: false
     build: npm
   - name: zorbit-app-hi_customer_portal
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-hi_customer_portal:latest
     port: 3067
     required: false
     build: npm
   - name: zorbit-app-network_empanelment_application
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-network_empanelment_application:latest
     port: 3068
     required: false
     build: npm
   - name: zorbit-app-network_empanelment_workflow
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-network_empanelment_workflow:latest
     port: 3069
     required: false
     build: npm
   - name: zorbit-app-claims_core
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-claims_core:latest
     port: 3070
     required: false
     build: npm
   - name: zorbit-app-claims_intake
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-claims_intake:latest
     port: 3071
     required: false
     build: npm
   - name: zorbit-app-jayna
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-jayna:latest
     port: 3072
     required: false
     build: npm
   - name: zorbit-app-broker
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-broker:latest
     port: 3073
     required: false
     build: npm
   - name: zorbit-app-product_pricing
     type: app
+    image: ghcr.io/souravsachin/zorbit-app-product_pricing:latest
     port: 3074
     required: false
     build: npm
