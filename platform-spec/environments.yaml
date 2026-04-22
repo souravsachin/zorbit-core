@@ -9,6 +9,14 @@
 schema_version: "1.0"
 updated: "2026-04-23"
 
+# Container naming rule (owner 2026-04-23):
+#   Platform services (per-env)  : z{e,q,d,u,p}-<module>
+#   Shared infra + TPMs (non-prod): zs-<service>  (one instance, many envs)
+#   Prod-dedicated TPMs           : zp-<service>  (never share prod data)
+# The `shared_tpms` list below is LOGICAL identifiers; physical container
+# names are always `zs-<tpm>` for non-prod and `zp-<tpm>` for prod.
+# See platform-spec/CONTAINER-NAMING.md for full rule.
+
 environments:
   - name: zorbit-dev
     purpose: developer workstations + shared dev server

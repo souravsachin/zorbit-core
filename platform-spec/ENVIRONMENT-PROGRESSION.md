@@ -35,6 +35,8 @@ tier 5: zorbit-prod   <--  tier 4: zorbit-uat  <--  tier 3: zorbit-demo
 - Container prefix: `ze-`
 - Port base: 3100
 - Shared TPMs: superset, odoo-shared, keycloak-shared, jitsi-shared
+  (physical container names use `zs-` prefix — one instance serves all
+  non-prod tiers; see `CONTAINER-NAMING.md`)
 - Rollback retention: 7 days
 - Developers push feature branches here freely.
 
@@ -65,7 +67,8 @@ tier 5: zorbit-prod   <--  tier 4: zorbit-uat  <--  tier 3: zorbit-demo
 ### Tier 5 — prod
 - Container prefix: `zp-`
 - Port base: 3400
-- Shared TPMs: none — all dedicated
+- Shared TPMs: none — all dedicated. TPM containers use `zp-` prefix,
+  never `zs-`. Production TPM data must never be shared with non-prod.
 - Gated by: uat
 - `--allow-prod` flag required
 - `ZORBIT_PROD_APPROVAL_TOKEN` env var required

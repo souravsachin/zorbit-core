@@ -396,6 +396,9 @@ repos:
 # ------------------------------------------------------------------
 # Shared infrastructure (not cloned - declared for compose generation)
 # ------------------------------------------------------------------
+# Naming rule (owner 2026-04-23): infra and TPM containers shared across
+# non-prod envs use `zs-` (s = Shared). Prod isolation uses `zp-`. See
+# platform-spec/CONTAINER-NAMING.md.
 infrastructure:
   - name: zs-pg
     image: postgres:16-alpine
@@ -412,3 +415,25 @@ infrastructure:
     image: redis:7-alpine
     port: 6379
     volumes: [zs-redis-data:/data]
+
+# ------------------------------------------------------------------
+# Shared third-party modules (TPMs) — declared for compose generation.
+# One instance serves all non-prod envs (dev/qa/demo/uat). Prod gets
+# dedicated zp- instances (declared per-customer elsewhere). Never share
+# prod TPM data with non-prod.
+# ------------------------------------------------------------------
+tpms_shared:
+  - name: zs-superset
+    image: zs-superset:4.1.1-psycopg2  # custom image built from apache/superset:4.1.1 + psycopg2
+    port: 8088
+    depends_on: [zs-superset-redis, zs-pg]
+    volumes: [zs-superset-home:/app/superset_home]
+  - name: zs-superset-redis
+    image: redis:7-alpine
+    port: 6380
+    volumes: [zs-superset-redis-data:/data]
+  # Future shared TPMs (declared from day one with zs- prefix):
+  # - name: zs-odoo        # ERP
+  # - name: zs-keycloak    # SSO
+  # - name: zs-jitsi       # meetings
+  # - name: zs-mailhog     # outbound mail dev/test
