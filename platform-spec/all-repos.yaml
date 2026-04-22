@@ -1,0 +1,414 @@
+# Zorbit Repository Manifest
+# ---------------------------------------------------------------------------
+# Authoritative list of all repos bootstrap-env.sh must clone + build.
+# Consumed by: bootstrap-env.sh, promote-env.sh
+# Spec version: 1.0 (2026-04-23)
+# ---------------------------------------------------------------------------
+
+schema_version: "1.0"
+updated: "2026-04-23"
+default_remote: "https://github.com/souravsachin"
+
+# Types:
+#   core        - governance repo, no runtime
+#   service     - runtime NestJS service (has port)
+#   sdk         - library published to npm/pypi, no port
+#   frontend    - Vite/React or Next.js build artifact
+#   cli         - CLI tool, no port
+#   app         - business module (ZMB)
+#   portal      - customer/prospect portal (frontend)
+
+repos:
+  # ------------------------------------------------------------------
+  # Governance + tooling
+  # ------------------------------------------------------------------
+  - name: zorbit-core
+    type: core
+    port: null
+    required: true
+    build: none
+  - name: zorbit-cli
+    type: cli
+    port: null
+    required: true
+    build: npm
+
+  # ------------------------------------------------------------------
+  # Core platform services (zorbit-cor-* + originals)
+  # ------------------------------------------------------------------
+  - name: zorbit-identity
+    type: service
+    port: 3001
+    required: true
+    build: npm
+    db: postgres
+    depends_on: [zs-pg]
+  - name: zorbit-authorization
+    type: service
+    port: 3002
+    required: true
+    build: npm
+    db: postgres
+    depends_on: [zs-pg, zorbit-identity]
+  - name: zorbit-navigation
+    type: service
+    port: 3003
+    required: true
+    build: npm
+    db: postgres
+    depends_on: [zs-pg, zorbit-identity, zorbit-authorization]
+  - name: zorbit-event_bus
+    type: service
+    port: 3004
+    required: true
+    build: npm
+    depends_on: [zs-kafka]
+  - name: zorbit-pii-vault
+    type: service
+    port: 3005
+    required: true
+    build: npm
+    db: postgres
+    depends_on: [zs-pg, zorbit-identity]
+  - name: zorbit-audit
+    type: service
+    port: 3006
+    required: true
+    build: npm
+    db: postgres
+    depends_on: [zs-pg, zorbit-event_bus]
+  - name: zorbit-cor-module_registry
+    type: service
+    port: 3020
+    required: true
+    build: npm
+    db: postgres
+    depends_on: [zs-pg, zorbit-event_bus]
+  - name: zorbit-cor-deployment_registry
+    type: service
+    port: 3021
+    required: true
+    build: npm
+    db: postgres
+    depends_on: [zs-pg, zorbit-cor-module_registry]
+  - name: zorbit-cor-observability
+    type: service
+    port: 3022
+    required: true
+    build: npm
+    depends_on: []
+  - name: zorbit-cor-secrets_vault
+    type: service
+    port: 3023
+    required: true
+    build: npm
+    db: postgres
+    depends_on: [zs-pg, zorbit-identity]
+
+  # ------------------------------------------------------------------
+  # Platform services (zorbit-pfs-*)
+  # ------------------------------------------------------------------
+  - name: zorbit-pfs-rtc
+    type: service
+    port: 3007
+    required: false
+    build: npm
+    depends_on: [zorbit-identity]
+  - name: zorbit-pfs-chat
+    type: service
+    port: 3008
+    required: false
+    build: npm
+    db: postgres
+    depends_on: [zs-pg, zorbit-identity]
+  - name: zorbit-pfs-ai_gateway
+    type: service
+    port: 3009
+    required: false
+    build: npm
+    depends_on: [zorbit-identity]
+  - name: zorbit-pfs-interaction_recorder
+    type: service
+    port: 3012
+    required: false
+    build: npm
+    db: postgres
+    depends_on: [zs-pg]
+  - name: zorbit-pfs-datatable
+    type: service
+    port: 3013
+    required: false
+    build: npm
+    db: mongo
+    depends_on: [zs-mongo, zorbit-identity]
+  - name: zorbit-pfs-form_builder
+    type: service
+    port: 3014
+    required: false
+    build: npm
+    db: mongo
+    depends_on: [zs-mongo, zorbit-identity]
+  - name: zorbit-pfs-verification
+    type: service
+    port: 3024
+    required: false
+    build: npm
+    db: mongo
+    depends_on: [zs-mongo]
+  - name: zorbit-pfs-white_label
+    type: service
+    port: 3034
+    required: false
+    build: npm
+    db: mongo
+    depends_on: [zs-mongo]
+  - name: zorbit-pfs-zmb_factory
+    type: service
+    port: 3035
+    required: false
+    build: npm
+    db: mongo
+    depends_on: [zs-mongo]
+  - name: zorbit-pfs-doc_generator
+    type: service
+    port: 3036
+    required: false
+    build: npm
+    depends_on: []
+    needs_chromium: true
+  - name: zorbit-pfs-seeder
+    type: service
+    port: 3037
+    required: false
+    build: npm
+    depends_on: [zorbit-identity, zorbit-pii-vault]
+  - name: zorbit-pfs-notification
+    type: service
+    port: 3038
+    required: false
+    build: npm
+    db: postgres
+    depends_on: [zs-pg]
+  - name: zorbit-pfs-file_storage
+    type: service
+    port: 3039
+    required: false
+    build: npm
+    depends_on: []
+  - name: zorbit-pfs-file_viewer
+    type: service
+    port: 3040
+    required: false
+    build: npm
+    depends_on: [zorbit-pfs-file_storage]
+  - name: zorbit-pfs-voice
+    type: service
+    port: 3041
+    required: false
+    build: npm
+    depends_on: []
+  - name: zorbit-pfs-voice_engine
+    type: service
+    port: 3042
+    required: false
+    build: npm
+    depends_on: [zorbit-pfs-voice]
+  - name: zorbit-pfs-payment_gateway
+    type: service
+    port: 3043
+    required: false
+    build: npm
+    db: postgres
+    depends_on: [zs-pg]
+  - name: zorbit-pfs-workflow_engine
+    type: service
+    port: 3044
+    required: false
+    build: npm
+    db: postgres
+    depends_on: [zs-pg]
+  - name: zorbit-pfs-analytics_reporting
+    type: service
+    port: 3045
+    required: false
+    build: npm
+    depends_on: []
+  - name: zorbit-pfs-api_integration
+    type: service
+    port: 3046
+    required: false
+    build: npm
+    depends_on: []
+  - name: zorbit-pfs-integration
+    type: service
+    port: 3047
+    required: false
+    build: npm
+    depends_on: []
+  - name: zorbit-pfs-kyc
+    type: service
+    port: 3048
+    required: false
+    build: npm
+    depends_on: [zorbit-pii-vault]
+  - name: zorbit-pfs-medical_coding
+    type: service
+    port: 3049
+    required: false
+    build: npm
+    depends_on: []
+  - name: zorbit-pfs-realtime
+    type: service
+    port: 3050
+    required: false
+    build: npm
+    depends_on: []
+  - name: zorbit-pfs-rpa_integration
+    type: service
+    port: 3051
+    required: false
+    build: npm
+    depends_on: []
+  - name: zorbit-pfs-secrets
+    type: service
+    port: 3052
+    required: false
+    build: npm
+    depends_on: [zorbit-cor-secrets_vault]
+
+  # ------------------------------------------------------------------
+  # SDKs (libraries - no runtime)
+  # ------------------------------------------------------------------
+  - name: zorbit-sdk-node
+    type: sdk
+    port: null
+    required: true
+    build: npm
+  - name: zorbit-sdk-react
+    type: sdk
+    port: null
+    required: true
+    build: npm
+
+  # ------------------------------------------------------------------
+  # Frontend (unified console)
+  # ------------------------------------------------------------------
+  - name: zorbit-unified-console
+    type: frontend
+    port: 3000
+    required: true
+    build: vite
+    depends_on: [zorbit-identity, zorbit-navigation]
+
+  # ------------------------------------------------------------------
+  # Portals
+  # ------------------------------------------------------------------
+  - name: zorbit-portal-customer
+    type: portal
+    port: 3060
+    required: false
+    build: vite
+  - name: zorbit-portal-prospect
+    type: portal
+    port: 3061
+    required: false
+    build: vite
+
+  # ------------------------------------------------------------------
+  # Business apps (ZMBs) - optional, not required for minimum platform
+  # ------------------------------------------------------------------
+  - name: sample-customer-service
+    type: app
+    port: 3010
+    required: false
+    build: npm
+  - name: zorbit-app-pcg4
+    type: app
+    port: 3011
+    required: false
+    build: npm
+  - name: zorbit-app-prospect_portal
+    type: app
+    port: 3062
+    required: false
+    build: vite
+  - name: zorbit-app-hi_uw_decisioning
+    type: app
+    port: 3063
+    required: false
+    build: npm
+  - name: zorbit-app-hi_claim_decisioning
+    type: app
+    port: 3064
+    required: false
+    build: npm
+  - name: zorbit-app-hi_claim_initiation
+    type: app
+    port: 3065
+    required: false
+    build: npm
+  - name: zorbit-app-hi_claim_adjudication_workflow
+    type: app
+    port: 3066
+    required: false
+    build: npm
+  - name: zorbit-app-hi_customer_portal
+    type: app
+    port: 3067
+    required: false
+    build: npm
+  - name: zorbit-app-network_empanelment_application
+    type: app
+    port: 3068
+    required: false
+    build: npm
+  - name: zorbit-app-network_empanelment_workflow
+    type: app
+    port: 3069
+    required: false
+    build: npm
+  - name: zorbit-app-claims_core
+    type: app
+    port: 3070
+    required: false
+    build: npm
+  - name: zorbit-app-claims_intake
+    type: app
+    port: 3071
+    required: false
+    build: npm
+  - name: zorbit-app-jayna
+    type: app
+    port: 3072
+    required: false
+    build: npm
+  - name: zorbit-app-broker
+    type: app
+    port: 3073
+    required: false
+    build: npm
+  - name: zorbit-app-product_pricing
+    type: app
+    port: 3074
+    required: false
+    build: npm
+
+# ------------------------------------------------------------------
+# Shared infrastructure (not cloned - declared for compose generation)
+# ------------------------------------------------------------------
+infrastructure:
+  - name: zs-pg
+    image: postgres:16-alpine
+    port: 5432
+    volumes: [zs-pg-data:/var/lib/postgresql/data]
+  - name: zs-mongo
+    image: mongo:7
+    port: 27017
+    volumes: [zs-mongo-data:/data/db]
+  - name: zs-kafka
+    image: bitnami/kafka:3.7
+    port: 9092
+  - name: zs-redis
+    image: redis:7-alpine
+    port: 6379
+    volumes: [zs-redis-data:/data]

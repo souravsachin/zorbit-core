@@ -1,0 +1,103 @@
+# Zorbit Environment Progression Model
+# ---------------------------------------------------------------------------
+# Tier progression: dev -> qa -> demo -> uat -> prod
+# Each tier gates promotion to the next.
+# Consumed by: zorbit-cli/scripts/bootstrap-env.sh and promote-env.sh.
+# Spec version: 1.0 (2026-04-23)
+# ---------------------------------------------------------------------------
+
+schema_version: "1.0"
+updated: "2026-04-23"
+
+environments:
+  - name: zorbit-dev
+    purpose: developer workstations + shared dev server
+    tier: 1
+    host_pattern: "*-dev.onezippy.ai"
+    default_host: "zorbit-dev.onezippy.ai"
+    port_base: 3100            # service ports start here
+    container_prefix: "ze"     # e = dev per naming convention
+    shared_tpms: [superset, odoo-shared, keycloak-shared, jitsi-shared]
+    auto_deploy: true
+    auto_seed_demo: true
+    gated_by: []
+    promotion_flag_required: null
+    approval_required: false
+    rollback_retention_days: 7
+
+  - name: zorbit-qa
+    purpose: continuous integration + automated test runs
+    tier: 2
+    host_pattern: "*-qa.onezippy.ai"
+    default_host: "zorbit-qa.onezippy.ai"
+    port_base: 3200
+    container_prefix: "zq"
+    shared_tpms: [superset, odoo-shared, keycloak-shared, jitsi-shared]
+    auto_deploy: true
+    auto_seed_demo: true
+    gated_by: [zorbit-dev]
+    promotion_flag_required: null
+    approval_required: false
+    rollback_retention_days: 14
+
+  - name: zorbit-demo
+    purpose: client demos, stakeholder walkthroughs
+    tier: 3
+    host_pattern: "*-demo.onezippy.ai"
+    default_host: "zorbit-demo.onezippy.ai"
+    port_base: 3300
+    container_prefix: "zd"     # demo uses zd- (distinct from dev)
+    shared_tpms: [superset, odoo-shared, keycloak-shared]
+    auto_deploy: false          # manual promotion only
+    auto_seed_demo: true
+    gated_by: [zorbit-qa]
+    promotion_flag_required: null
+    approval_required: false
+    rollback_retention_days: 30
+
+  - name: zorbit-uat
+    purpose: paying customer UAT + pre-prod validation
+    tier: 4
+    host_pattern: "*-uat.onezippy.ai"
+    default_host: "zorbit-uat.onezippy.ai"
+    port_base: 3100            # aligned with existing UAT deployment
+    container_prefix: "zu"
+    shared_tpms: [superset]     # odoo/keycloak dedicated per customer
+    auto_deploy: false
+    auto_seed_demo: false       # customer-specific data
+    gated_by: [zorbit-demo]
+    promotion_flag_required: null
+    approval_required: true
+    rollback_retention_days: 30
+
+  - name: zorbit-prod
+    purpose: live production
+    tier: 5
+    host_pattern: "*.onezippy.ai"   # bare domain + customer-specific
+    default_host: "app.onezippy.ai"
+    port_base: 3400
+    container_prefix: "zp"
+    shared_tpms: []                 # all dedicated
+    auto_deploy: false
+    auto_seed_demo: false
+    gated_by: [zorbit-uat]
+    promotion_flag_required: "--allow-prod"
+    approval_required: true
+    rollback_retention_days: 90
+
+# Progression chain: list form for scripts.
+progression_chain:
+  - zorbit-dev
+  - zorbit-qa
+  - zorbit-demo
+  - zorbit-uat
+  - zorbit-prod
+
+# Service account used to run bootstrap-env.sh.
+service_accounts:
+  allowed: [zorbit-svc, zorbit-deployer]
+  default: zorbit-deployer
+  home: /home/zorbit-deployer
+  data_root: /opt/zorbit-platform
+  snapshots_dir: /opt/zorbit-platform/snapshots
+  logs_dir: /var/log/zorbit-platform
