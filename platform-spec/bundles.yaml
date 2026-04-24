@@ -1,0 +1,332 @@
+# ---------------------------------------------------------------------------
+# Zorbit Bundle Map
+# ---------------------------------------------------------------------------
+# Authoritative mapping from each Zorbit repo to one of 5 deployment bundles.
+# Consumed by:
+#   - zorbit-cli/scripts/package-bundle.sh     (builds <env>-<bundle>.tar.gz)
+#   - zorbit-cli/scripts/templates/compose/*   (generates docker-compose.yml)
+#   - zorbit-cli/scripts/gates-harness.sh      (derives EXPECTED_CONTAINERS)
+#
+# Owner feedback 2026-04-23:
+#   - Five bundles: core, pfs, apps, ai, web.
+#   - Each bundle runs in ONE physical container under PM2 (except web = nginx).
+#   - Ports are PRE-ASSIGNED here, not discovered at runtime.
+#   - Container names: {env_prefix}-{bundle}
+#       env_prefix in {ze, zq, zd, zu, zp}  (see CONTAINER-NAMING.md)
+#     Example: ze-core, zu-pfs, zp-apps
+#
+# Port ranges (per owner directive, stable within bundle):
+#   core: 3000-3099   (100 slots)
+#   pfs:  3100-3199   (100 slots)
+#   apps: 3200-3599   (400 slots)
+#   ai:   3600-3799   (200 slots)
+#   web:  3000/80/443 (served by nginx-alpine — no PM2)
+#
+# Naming rules (STRICT):
+#   - Underscores preserved inside module name. Never hyphenate the module
+#     portion. `zorbit-app-hi_claim_payment_recon`, NOT `...hi-claim-...`.
+#   - `moduleSlug` = repo name with leading `zorbit-` stripped (keep the
+#     type prefix). Example: `pfs-rules_engine`, `app-pcg4`, `cor-identity`.
+#
+# ---------------------------------------------------------------------------
+
+schema_version: "1.0"
+updated: "2026-04-23"
+
+# Env prefix substitution hint used when rendering compose/nginx:
+#   container_name: "{env_prefix}-{bundle}"  →  "ze-core", "zu-pfs", etc.
+env_prefix_substitution: "{env_prefix}-{bundle}"
+
+# Shared infra (per CONTAINER-NAMING.md — zs- prefix across all non-prod).
+# NOT part of any bundle; declared here for gates-harness visibility.
+shared:
+  - name: zs-pg
+    image: postgres:16-alpine
+    host_port: 5432
+  - name: zs-mongo
+    image: mongo:7
+    host_port: 27017
+  - name: zs-kafka
+    image: bitnami/kafka:3.7
+    host_port: 9092
+  - name: zs-redis
+    image: redis:7-alpine
+    host_port: 6379
+  - name: zs-nginx
+    image: nginx:1.27-alpine
+    host_port: 443
+  - name: zs-zeebe
+    image: camunda/zeebe:8.5
+    host_port: 26500
+
+# ---------------------------------------------------------------------------
+# BUNDLE: core  (ports 3000-3099)
+# Core platform services — identity / authz / nav / event_bus / pii / audit
+# plus the cor-* governance services.
+# ---------------------------------------------------------------------------
+bundles:
+  core:
+    port_range: [3000, 3099]
+    runtime: pm2
+    base_image: zorbit-pm2-base:1.0
+    services:
+      # Alphabetical order within bundle — ports assigned stably.
+      - repo: zorbit-audit
+        port: 3006
+        slug: audit
+      - repo: zorbit-authorization
+        port: 3002
+        slug: authorization
+      - repo: zorbit-cor-deployment_registry
+        port: 3021
+        slug: cor-deployment_registry
+      - repo: zorbit-cor-module_registry
+        port: 3020
+        slug: cor-module_registry
+      - repo: zorbit-cor-observability
+        port: 3022
+        slug: cor-observability
+      - repo: zorbit-cor-secrets_vault
+        port: 3023
+        slug: cor-secrets_vault
+      - repo: zorbit-event_bus
+        port: 3004
+        slug: event_bus
+      - repo: zorbit-identity
+        port: 3001
+        slug: identity
+      - repo: zorbit-navigation
+        port: 3003
+        slug: navigation
+      - repo: zorbit-pii-vault
+        port: 3005
+        slug: pii-vault
+
+  # -------------------------------------------------------------------------
+  # BUNDLE: pfs   (ports 3100-3199)
+  # Platform Feature Services — reusable capabilities.
+  # -------------------------------------------------------------------------
+  pfs:
+    port_range: [3100, 3199]
+    runtime: pm2
+    base_image: zorbit-pm2-base:1.0
+    services:
+      - repo: zorbit-pfs-ai_gateway
+        port: 3100
+        slug: pfs-ai_gateway
+      - repo: zorbit-pfs-analytics_reporting
+        port: 3101
+        slug: pfs-analytics_reporting
+      - repo: zorbit-pfs-api_integration
+        port: 3102
+        slug: pfs-api_integration
+      - repo: zorbit-pfs-chat
+        port: 3103
+        slug: pfs-chat
+      - repo: zorbit-pfs-datatable
+        port: 3104
+        slug: pfs-datatable
+      - repo: zorbit-pfs-doc_generator
+        port: 3105
+        slug: pfs-doc_generator
+      - repo: zorbit-pfs-file_storage
+        port: 3106
+        slug: pfs-file_storage
+      - repo: zorbit-pfs-file_viewer
+        port: 3107
+        slug: pfs-file_viewer
+      - repo: zorbit-pfs-form_builder
+        port: 3108
+        slug: pfs-form_builder
+      - repo: zorbit-pfs-integration
+        port: 3109
+        slug: pfs-integration
+      - repo: zorbit-pfs-interaction_recorder
+        port: 3110
+        slug: pfs-interaction_recorder
+      - repo: zorbit-pfs-kyc
+        port: 3111
+        slug: pfs-kyc
+      - repo: zorbit-pfs-medical_coding
+        port: 3112
+        slug: pfs-medical_coding
+      - repo: zorbit-pfs-notification
+        port: 3113
+        slug: pfs-notification
+      - repo: zorbit-pfs-payment_gateway
+        port: 3114
+        slug: pfs-payment_gateway
+      - repo: zorbit-pfs-pixel
+        port: 3115
+        slug: pfs-pixel
+      - repo: zorbit-pfs-realtime
+        port: 3116
+        slug: pfs-realtime
+      - repo: zorbit-pfs-rpa_integration
+        port: 3117
+        slug: pfs-rpa_integration
+      - repo: zorbit-pfs-rtc
+        port: 3118
+        slug: pfs-rtc
+      - repo: zorbit-pfs-rules_engine
+        port: 3119
+        slug: pfs-rules_engine
+      - repo: zorbit-pfs-secrets
+        port: 3120
+        slug: pfs-secrets
+      - repo: zorbit-pfs-seeder
+        port: 3121
+        slug: pfs-seeder
+      # zorbit-pfs-verification — not scaffolded yet; KYC covers verification needs
+      # for now. Add back to bundle when repo exists.
+      # - repo: zorbit-pfs-verification
+      #   port: 3122
+      #   slug: pfs-verification
+      - repo: zorbit-pfs-voice
+        port: 3123
+        slug: pfs-voice
+      - repo: zorbit-pfs-voice_engine
+        port: 3124
+        slug: pfs-voice_engine
+      - repo: zorbit-pfs-white_label
+        port: 3125
+        slug: pfs-white_label
+      # pfs-workflow stub was superseded by pfs-workflow_engine (v1.3.0, mature,
+      # bpmn-engine + visual designer + 5 seeded BPMN XMLs). Decision:
+      # zorbit-core/platform-spec/pfs-workflow-decision.md (2026-04-24).
+      - repo: zorbit-pfs-workflow_engine
+        port: 3126
+        slug: pfs-workflow_engine
+      - repo: zorbit-pfs-zmb_factory
+        port: 3128
+        slug: pfs-zmb_factory
+
+  # -------------------------------------------------------------------------
+  # BUNDLE: apps  (ports 3200-3599)
+  # Business modules (ZMBs) + sample + portals.
+  # -------------------------------------------------------------------------
+  apps:
+    port_range: [3200, 3599]
+    runtime: pm2
+    base_image: zorbit-pm2-base:1.0
+    services:
+      - repo: sample-customer-service
+        port: 3200
+        slug: sample-customer-service
+      - repo: zorbit-app-broker
+        port: 3201
+        slug: app-broker
+      - repo: zorbit-app-claims_core
+        port: 3202
+        slug: app-claims_core
+      - repo: zorbit-app-claims_intake
+        port: 3203
+        slug: app-claims_intake
+      - repo: zorbit-app-hi_claim_adjudication_workflow
+        port: 3204
+        slug: app-hi_claim_adjudication_workflow
+      - repo: zorbit-app-hi_claim_decisioning
+        port: 3205
+        slug: app-hi_claim_decisioning
+      - repo: zorbit-app-hi_claim_initiation
+        port: 3206
+        slug: app-hi_claim_initiation
+      - repo: zorbit-app-hi_claim_payment_recon
+        port: 3207
+        slug: app-hi_claim_payment_recon
+      - repo: zorbit-app-hi_customer_portal
+        port: 3208
+        slug: app-hi_customer_portal
+      - repo: zorbit-app-hi_quotation
+        port: 3209
+        slug: app-hi_quotation
+      - repo: zorbit-app-hi_retail_quotation
+        port: 3210
+        slug: app-hi_retail_quotation
+      - repo: zorbit-app-hi_sme_quotation
+        port: 3211
+        slug: app-hi_sme_quotation
+      - repo: zorbit-app-hi_uw_decisioning
+        port: 3212
+        slug: app-hi_uw_decisioning
+      - repo: zorbit-app-jayna
+        port: 3213
+        slug: app-jayna
+      - repo: zorbit-app-manufacturing_demo
+        port: 3214
+        slug: app-manufacturing_demo
+      - repo: zorbit-app-mi_quotation
+        port: 3215
+        slug: app-mi_quotation
+      - repo: zorbit-app-network_empanelment_application
+        port: 3216
+        slug: app-network_empanelment_application
+      - repo: zorbit-app-network_empanelment_workflow
+        port: 3217
+        slug: app-network_empanelment_workflow
+      - repo: zorbit-app-pcg4
+        port: 3218
+        slug: app-pcg4
+      - repo: zorbit-app-pcg5
+        port: 3219
+        slug: app-pcg5
+      - repo: zorbit-app-product_pricing
+        port: 3220
+        slug: app-product_pricing
+      - repo: zorbit-app-prospect_portal
+        port: 3221
+        slug: app-prospect_portal
+      - repo: zorbit-app-retail_banking_demo
+        port: 3222
+        slug: app-retail_banking_demo
+      - repo: zorbit-app-sample
+        port: 3223
+        slug: app-sample
+      - repo: zorbit-app-sample_module
+        port: 3224
+        slug: app-sample_module
+      - repo: zorbit-app-slice_of_pie
+        port: 3225
+        slug: app-slice_of_pie
+      - repo: zorbit-app-uw_workflow
+        port: 3226
+        slug: app-uw_workflow
+      - repo: zorbit-app-wealth_mgmt_demo
+        port: 3227
+        slug: app-wealth_mgmt_demo
+      - repo: zorbit-app-zmb_selftest
+        port: 3228
+        slug: app-zmb_selftest
+      - repo: zorbit-portal-customer
+        port: 3229
+        slug: portal-customer
+      - repo: zorbit-portal-prospect
+        port: 3230
+        slug: portal-prospect
+
+  # -------------------------------------------------------------------------
+  # BUNDLE: ai    (ports 3600-3799)
+  # Dedicated AI agents / model-serving services.
+  # -------------------------------------------------------------------------
+  ai:
+    port_range: [3600, 3799]
+    runtime: pm2
+    base_image: zorbit-pm2-base:1.0
+    services:
+      - repo: zorbit-ai-tele_uw
+        port: 3600
+        slug: ai-tele_uw
+
+  # -------------------------------------------------------------------------
+  # BUNDLE: web   (ports 80/443 via nginx-alpine)
+  # Static SPA(s) — unified-console and any other built-in frontends.
+  # Runtime is nginx, NOT PM2. Uses a dedicated minimal Dockerfile.
+  # -------------------------------------------------------------------------
+  web:
+    port_range: [80, 443]
+    runtime: nginx
+    base_image: nginx:1.27-alpine
+    services:
+      - repo: zorbit-unified-console
+        port: 80
+        slug: web
