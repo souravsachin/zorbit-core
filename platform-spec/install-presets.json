@@ -1,0 +1,215 @@
+{
+  "$schema": "https://zorbit-platform.github.io/spec/install-presets-v1.json",
+  "version": "1.0.0",
+  "spec_owner": "zorbit-core/platform-spec",
+  "updated": "2026-04-27",
+  "purpose": "OS-installer-style preset+override selector for env-install pipeline. Inspired by Debian tasksel + Red Hat Anaconda. Consumed by `zorbit env install` (zorbit-cli) and `bootstrap-env.sh`.",
+  "design_notes": [
+    "Modules listed here MUST resolve to entries in zorbit-core/platform-spec/all-repos.yaml.",
+    "Modules absent from all-repos.yaml are flagged in the `planned_modules` section — installer will warn + skip them until they are published.",
+    "Preset selection is layered: (a) base preset, (b) --add modules, (c) --remove modules, (d) write resolved lockfile to /etc/zorbit/<env>-install.lock.",
+    "Memory + disk estimates are coarse — derived from observed footprint of zorbit-dev (16 GB VM with 66 services consumed ~12 GB RAM)."
+  ],
+  "groups": {
+    "core_platform_services": {
+      "label": "Core Platform Services",
+      "description": "Identity, authorization, navigation, audit, event bus, PII vault, observability, secrets vault, module registry, deployment registry. Always required for any working env.",
+      "always_required": true,
+      "modules": [
+        "zorbit-identity",
+        "zorbit-authorization",
+        "zorbit-navigation",
+        "zorbit-audit",
+        "zorbit-pii-vault",
+        "zorbit-event_bus",
+        "zorbit-cor-module_registry",
+        "zorbit-cor-deployment_registry",
+        "zorbit-cor-observability",
+        "zorbit-cor-secrets_vault"
+      ]
+    },
+    "developer_center": {
+      "label": "Developer Center",
+      "description": "ZMB factory, observability dashboards, deployment registry tooling — for platform engineers.",
+      "modules": [
+        "zorbit-pfs-zmb_factory",
+        "zorbit-cor-observability",
+        "zorbit-cor-deployment_registry"
+      ]
+    },
+    "platform_capabilities": {
+      "label": "Platform Capabilities (PFS)",
+      "description": "Reusable platform feature services — data tables, forms, chat, AI gateway, doc generator, etc.",
+      "modules": [
+        "zorbit-pfs-rtc",
+        "zorbit-pfs-chat",
+        "zorbit-pfs-ai_gateway",
+        "zorbit-pfs-datatable",
+        "zorbit-pfs-form_builder",
+        "zorbit-pfs-interaction_recorder",
+        "zorbit-pfs-verification",
+        "zorbit-pfs-white_label",
+        "zorbit-pfs-zmb_factory",
+        "zorbit-pfs-doc_generator",
+        "zorbit-pfs-workflow_engine",
+        "zorbit-pfs-payment_gateway",
+        "zorbit-pfs-secrets",
+        "zorbit-pfs-notification",
+        "zorbit-pfs-realtime",
+        "zorbit-pfs-voice",
+        "zorbit-pfs-voice_engine",
+        "zorbit-pfs-kyc",
+        "zorbit-pfs-api_integration",
+        "zorbit-pfs-rpa_integration",
+        "zorbit-pfs-integration",
+        "zorbit-pfs-analytics_reporting",
+        "zorbit-pfs-medical_coding",
+        "zorbit-pfs-file_storage",
+        "zorbit-pfs-file_viewer",
+        "zorbit-pfs-seeder"
+      ]
+    },
+    "agentic_calling": {
+      "label": "Agentic Calling",
+      "description": "AI-powered telephony / underwriting calls. Includes Jayna agentic calling module.",
+      "modules": [
+        "zorbit-app-jayna"
+      ],
+      "planned_modules": [
+        "zorbit-ai-tele_uw"
+      ]
+    },
+    "user_profile_preferences": {
+      "label": "User & Tenant Settings",
+      "description": "User profile, white-label theme/branding, edition selector.",
+      "modules": [
+        "zorbit-pfs-white_label"
+      ]
+    },
+    "business_health_insurance": {
+      "label": "Business — Health Insurance",
+      "description": "Insurance domain modules — quotation, underwriting, claims, decisioning, network empanelment, broker, customer portal.",
+      "modules": [
+        "zorbit-app-hi_uw_decisioning",
+        "zorbit-app-hi_claim_initiation",
+        "zorbit-app-hi_claim_adjudication_workflow",
+        "zorbit-app-hi_claim_decisioning",
+        "zorbit-app-hi_customer_portal",
+        "zorbit-app-claims_intake",
+        "zorbit-app-claims_core",
+        "zorbit-app-broker",
+        "zorbit-app-network_empanelment_application",
+        "zorbit-app-network_empanelment_workflow",
+        "zorbit-app-prospect_portal",
+        "zorbit-app-product_pricing",
+        "zorbit-app-pcg4"
+      ],
+      "planned_modules": [
+        "zorbit-app-hi_retail_quotation",
+        "zorbit-app-hi_sme_quotation",
+        "zorbit-app-hi_retail_uw_workflow",
+        "zorbit-app-hi_sme_uw_workflow",
+        "zorbit-app-hi_claim_workflow",
+        "zorbit-app-hi_claim_payment_recon",
+        "zorbit-app-hi_policy_issue",
+        "zorbit-app-mi_quotation",
+        "zorbit-app-pcg5"
+      ]
+    },
+    "third_party_modules": {
+      "label": "Third-Party Modules (TPM)",
+      "description": "Integrated third-party systems — Jitsi (video conferencing), Odoo (ERP). Mapped via TPM containers, not Zorbit-built.",
+      "planned_modules": [
+        "tpm-jitsi",
+        "tpm-odoo"
+      ]
+    },
+    "shared_infrastructure": {
+      "label": "Shared Infrastructure (zs-*)",
+      "description": "Shared infra containers — Postgres, MongoDB, Kafka, Redis, Superset. Always provisioned regardless of preset (unless --skip-shared-infra).",
+      "always_required": true,
+      "modules": [
+        "zs-pg",
+        "zs-mongo",
+        "zs-kafka",
+        "zs-redis"
+      ]
+    },
+    "frontend_console": {
+      "label": "Frontend Console",
+      "description": "Unified SPA console + customer/prospect portals.",
+      "modules": [
+        "zorbit-unified-console",
+        "zorbit-portal-customer",
+        "zorbit-portal-prospect"
+      ]
+    }
+  },
+  "presets": {
+    "minimal": {
+      "label": "Minimal — bare platform skeleton",
+      "description": "Just enough to login + see an empty sidebar. Core platform services + shared infra + unified console only. Use for: dev sandbox, debugging, smoke tests.",
+      "estimated_services": 14,
+      "estimated_memory_gb": 4,
+      "estimated_disk_gb": 12,
+      "includes_groups": [
+        "core_platform_services",
+        "shared_infrastructure"
+      ],
+      "includes_modules": [
+        "zorbit-unified-console"
+      ]
+    },
+    "recommended": {
+      "label": "Recommended — demo-ready",
+      "description": "Core + key PFS + 3 demo business modules. Enough to show the platform in action with a couple of live ZMBs. Use for: QA env, demos, integration testing.",
+      "estimated_services": 24,
+      "estimated_memory_gb": 7,
+      "estimated_disk_gb": 22,
+      "includes_groups": [
+        "core_platform_services",
+        "shared_infrastructure",
+        "frontend_console"
+      ],
+      "includes_modules": [
+        "zorbit-pfs-datatable",
+        "zorbit-pfs-form_builder",
+        "zorbit-pfs-rtc",
+        "zorbit-pfs-chat",
+        "zorbit-pfs-ai_gateway",
+        "zorbit-pfs-doc_generator",
+        "zorbit-pfs-notification",
+        "zorbit-app-hi_uw_decisioning",
+        "zorbit-app-hi_claim_initiation",
+        "zorbit-app-broker"
+      ]
+    },
+    "max": {
+      "label": "Max — full platform parity",
+      "description": "Every published service in every group. Mirrors prod feature surface. Use for: prod-mirror staging, full feature regression. Memory hungry — needs 12+ GB.",
+      "estimated_services": 64,
+      "estimated_memory_gb": 12,
+      "estimated_disk_gb": 50,
+      "includes_all_groups": true
+    },
+    "developer": {
+      "label": "Developer — minimal + dev tools",
+      "description": "Minimal preset plus the developer center (ZMB factory, observability, deployment registry). Use for: building new modules.",
+      "estimated_services": 16,
+      "estimated_memory_gb": 5,
+      "estimated_disk_gb": 14,
+      "includes_groups": [
+        "core_platform_services",
+        "shared_infrastructure",
+        "developer_center",
+        "frontend_console"
+      ]
+    }
+  },
+  "validation_rules": {
+    "module_must_exist_in_manifest": "Every module in `groups.*.modules` MUST resolve to an entry in zorbit-core/platform-spec/all-repos.yaml. The resolver will fail-fast if any does not.",
+    "planned_modules_skipped": "Entries under `groups.*.planned_modules` are documented future work — the resolver will WARN and skip them at install time.",
+    "always_required_groups": "Groups marked `always_required: true` are merged into every preset, even if not explicitly listed in `includes_groups`.",
+    "cli_override_grammar": "--add and --remove accept comma-separated module slugs (with or without `zorbit-` prefix). Resolver normalises to canonical slugs from all-repos.yaml."
+  }
+}
