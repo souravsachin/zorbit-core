@@ -1,0 +1,495 @@
+{
+  "$schema": "./module-expected-structure.schema.json",
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-27",
+  "purpose": "Per-module declaration of REQUIRED and OPTIONAL L4 child structure (nav.groups + per-group items). The Section S structure-validator (zorbit-cli) walks the live menu tree, looks up each registered module here, and asserts every required group and item is present (resolves to a feRoute). Missing required = 🔴 BLOCKER. Missing optional = 🟡 NON-BLOCKER. This is the structural contract every module ships against; the manifest-v2 schema (per (ii)'s work in enum-placement-canonical / placement-canonical-mapping) declares scaffold/businessLine/capabilityArea, while THIS file declares what's required UNDER each module once it's placed.",
+  "sourceOfTruth": "Pattern derived from 00_docs/platform/static-menu-6level-snapshot.json. Updated as canonical scaffold pattern evolves.",
+
+  "groupKeys": {
+    "description": "Allowed group keys (L3 below module). Each module's manifest declares which apply via nav.groups.",
+    "values": [
+      "guide",
+      "setup",
+      "deployment",
+      "data",
+      "operations",
+      "demo",
+      "config",
+      "help"
+    ],
+    "synonyms": {
+      "deployments": "deployment",
+      "deploy": "deployment",
+      "guides": "guide",
+      "ops": "operations",
+      "configuration": "config"
+    }
+  },
+
+  "guideRequiredTabs": {
+    "description": "Every module that declares group 'guide' MUST expose these tabs as L4 feRoutes under {modulePath}/guide/{tab}. Missing any = 🟡 NON-BLOCKER (cosmetic for now; promotes to BLOCKER once cycle 107 lands per MSG-054).",
+    "values": [
+      "introduction",
+      "presentation",
+      "lifecycle",
+      "video-tutorials",
+      "resources",
+      "pricing"
+    ]
+  },
+
+  "modules": {
+    "_template_": {
+      "description": "Template — copy this when adding a new module. Fields: required_groups (must exist), optional_groups (allowed but not asserted), required_<group>_items (must resolve to feRoute), optional_<group>_items (allowed). All keys are slugs (snake_case or kebab; resolver normalises).",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": [],
+      "optional_data_items": [],
+      "required_deployment_items": [],
+      "optional_deployment_items": [],
+      "required_setup_items": [],
+      "optional_setup_items": [],
+      "required_operations_items": [],
+      "optional_operations_items": []
+    },
+
+    "identity": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-identity",
+      "feRoute": "/m/identity",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["users", "organizations"],
+      "optional_data_items": ["sessions", "user-directory"]
+    },
+
+    "authorization": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-authorization",
+      "feRoute": "/m/authorization",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["roles", "privileges"]
+    },
+
+    "navigation": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-navigation",
+      "feRoute": "/m/navigation",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["menus"],
+      "optional_data_items": ["routes"]
+    },
+
+    "event_bus": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-messaging",
+      "feRoute": "/m/event_bus",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment", "operations"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["topics", "events"],
+      "optional_data_items": ["consumer-groups", "dlq"]
+    },
+
+    "audit": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-audit",
+      "feRoute": "/m/audit",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["logs"]
+    },
+
+    "pii_vault": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-pii-vault",
+      "feRoute": "/m/pii_vault",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["tokens"]
+    },
+
+    "secrets_vault": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-secrets",
+      "feRoute": "/m/secrets_vault",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["list"],
+      "optional_data_items": ["audit"]
+    },
+
+    "pii_showcase": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-pii-showcase",
+      "feRoute": "/m/pii_showcase",
+      "required_groups": ["guide", "demo"],
+      "optional_groups": ["setup", "deployment", "config"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_demo_items": ["dashboard", "upload"],
+      "optional_config_items": ["config"]
+    },
+
+    "verification": {
+      "scaffold": "Core Platform Services",
+      "menuId": "core-verification",
+      "feRoute": "/m/verification",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data", "help"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "datatable": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-datatable",
+      "feRoute": "/m/datatable",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "demo"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "optional_demo_items": ["designer", "demo"]
+    },
+
+    "form_builder": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-form-builder",
+      "feRoute": "/m/form_builder",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment", "operations"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["templates"],
+      "optional_data_items": ["create", "submissions"]
+    },
+
+    "workflow_engine": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-workflow-engine",
+      "feRoute": "/m/workflow_engine",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment", "operations"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["pipelines", "queues"],
+      "optional_data_items": ["filters"]
+    },
+
+    "ai_gateway": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-ai-gateway",
+      "feRoute": "/m/ai_gateway",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "realtime": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-realtime",
+      "feRoute": "/m/realtime",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["rtc", "chat"]
+    },
+
+    "interaction_recorder": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-interaction-recorder",
+      "feRoute": "/m/interaction_recorder",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "notification": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-notification",
+      "feRoute": "/m/notification",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "integration": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-integration",
+      "feRoute": "/m/integration",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "directory": {
+      "scaffold": "Platform Capabilities",
+      "menuId": "cap-directory",
+      "feRoute": "/m/directory",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "optional_data_items": ["browse"]
+    },
+
+    "tele_uw": {
+      "scaffold": "Agentic Calling",
+      "menuId": "ai-jayna-tele-uw",
+      "feRoute": "/m/tele_uw",
+      "required_groups": ["guide", "data"],
+      "optional_groups": ["setup", "deployment", "operations"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"],
+      "required_data_items": ["campaigns", "attempts"],
+      "optional_data_items": ["live"]
+    },
+
+    "voice_engine": {
+      "scaffold": "Agentic Calling",
+      "menuId": "ai-voice-engine",
+      "feRoute": "/m/voice_engine",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "pcg4": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "Product Management",
+      "menuId": "biz-dist-pm-pcg4",
+      "feRoute": "/m/pcg4",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "product_pricing": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "Product Management",
+      "menuId": "biz-dist-pm-pricing",
+      "feRoute": "/m/product_pricing",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "hi_quotation": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Retail (Individual)",
+      "menuId": "biz-dist-pas-retail-hi-quotation",
+      "feRoute": "/m/hi_quotation",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "mi_quotation": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Retail (Individual)",
+      "menuId": "biz-dist-pas-retail-mi-quotation",
+      "feRoute": "/m/mi_quotation",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "hi_uw_decisioning": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Retail (Individual)",
+      "menuId": "biz-dist-pas-retail-hi-uw-decisioning",
+      "feRoute": "/m/hi_uw_decisioning",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "uw_workflow": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Retail (Individual)",
+      "menuId": "biz-dist-pas-retail-uw-workflow",
+      "feRoute": "/m/uw_workflow",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "fee_management": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Retail (Individual)",
+      "menuId": "biz-dist-pas-retail-fee-mgmt",
+      "feRoute": "/m/fee_management",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "doc_management": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Retail (Individual)",
+      "menuId": "biz-dist-pas-retail-doc-mgmt",
+      "feRoute": "/m/doc_management",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "maf_engine": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Retail (Individual)",
+      "menuId": "biz-dist-pas-retail-maf-engine",
+      "feRoute": "/m/maf_engine",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "policy_issuance": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Retail (Individual)",
+      "menuId": "biz-dist-pas-retail-issuance-module",
+      "feRoute": "/m/policy_issuance",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "sme_quotes": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Group / Corporate",
+      "menuId": "biz-dist-pas-group-sme-module",
+      "feRoute": "/m/sme_quotes",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "reinsurance": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Distribution Side",
+      "capabilityArea": "PAS - Group / Corporate",
+      "menuId": "biz-dist-pas-group-reins-module",
+      "feRoute": "/m/reinsurance",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "medical_coding": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Servicing Side",
+      "capabilityArea": "Network Management",
+      "menuId": "biz-serv-network-mc-module",
+      "feRoute": "/m/medical_coding",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "claims_adjudication": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Servicing Side",
+      "capabilityArea": "Claims Management",
+      "menuId": "biz-serv-claims-core-module",
+      "feRoute": "/m/claims_adjudication",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "claims_tpa": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Servicing Side",
+      "capabilityArea": "Claims Management",
+      "menuId": "biz-serv-claims-tpa-module",
+      "feRoute": "/m/claims_tpa",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "policy_endorsements": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Servicing Side",
+      "capabilityArea": "Customer Servicing",
+      "menuId": "biz-serv-customer-endorse-module",
+      "feRoute": "/m/policy_endorsements",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "policy_renewals": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Servicing Side",
+      "capabilityArea": "Customer Servicing",
+      "menuId": "biz-serv-customer-renewals-module",
+      "feRoute": "/m/policy_renewals",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "analytics_reporting": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "Compliance & Risk",
+      "capabilityArea": "Reporting & Analytics",
+      "menuId": "biz-compliance-reporting-module",
+      "feRoute": "/m/analytics_reporting",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "rpa_integration": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "FWA (Fraud, Waste, Abuse)",
+      "capabilityArea": "RPA Integration",
+      "menuId": "biz-fwa-rpa-module",
+      "feRoute": "/m/rpa_integration",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    },
+
+    "api_integration": {
+      "scaffold": "Business Lines (Insurance)",
+      "businessLine": "FWA (Fraud, Waste, Abuse)",
+      "capabilityArea": "API Integration",
+      "menuId": "biz-fwa-api-module",
+      "feRoute": "/m/api_integration",
+      "required_groups": ["guide"],
+      "optional_groups": ["setup", "deployment", "data"],
+      "required_guide_items": ["introduction", "presentation", "lifecycle", "video-tutorials", "resources", "pricing"]
+    }
+  },
+
+  "validatorContract": {
+    "description": "How Section S validator (zorbit-cli/scripts/cycles/section-s-structure.ts) consumes this file.",
+    "steps": [
+      "1. Load this JSON. Build module → expected-structure index.",
+      "2. Authenticate as super-admin (B.00 must have passed).",
+      "3. Fetch live menu via GET /api/navigation/api/v1/U/<userHashId>/menu.",
+      "4. Walk the menu tree. For each node with id matching `modules[*].menuId`, descend.",
+      "5. Collect L3 group keys actually present (children with role=group OR children grouped by category).",
+      "6. For each `required_groups[i]`: assert present. Missing = 🔴 BLOCKER.",
+      "7. For each `required_<group>_items[j]`: assert that one of the L4 leafs under that group has a feRoute matching `<modulePath>/<group>/<item>` OR slug equal to `<item>`. Missing = 🔴 BLOCKER.",
+      "8. For each `optional_*_items[j]`: same as above but missing = 🟡 NON-BLOCKER (record + continue).",
+      "9. Output report JSON: { module, expected: {groups, items}, actual: {groups, items}, missing_required: [...], missing_optional: [...], pass: bool }.",
+      "10. Exit non-zero iff any module has non-empty missing_required."
+    ]
+  }
+}
