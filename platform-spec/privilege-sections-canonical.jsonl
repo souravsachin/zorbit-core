@@ -1,0 +1,4 @@
+{"id":"SEC-PLAT","section_code":"platform","section_label":"Platform","icon":"shield","seq_number":0,"visible":true}
+{"id":"SEC-CORE","section_code":"core","section_label":"Core Services","icon":"cog","seq_number":1,"visible":true}
+{"id":"SEC-PFS","section_code":"pfs","section_label":"Platform Foundational Services","icon":"puzzle","seq_number":2,"visible":true}
+{"id":"SEC-APPS","section_code":"apps","section_label":"Business Applications","icon":"briefcase","seq_number":3,"visible":true}

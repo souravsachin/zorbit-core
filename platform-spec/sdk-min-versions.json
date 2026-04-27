@@ -1,0 +1,24 @@
+{
+  "$schema": "https://zorbit/platform-spec/sdk-min-versions.schema.json",
+  "description": "Per-service minimum @zorbit-platform/sdk-node version contract. The installer's preflight asserts every service in the bundle ships with an SDK >= the value here. Updated when a service starts depending on a new SDK feature.",
+  "as_of": "2026-04-27",
+  "current_min": "0.5.11",
+  "rationale": [
+    "0.5.0+: ZorbitAuthModule, PrivilegeResolver",
+    "0.5.7+: privilege_set_hash in JWT claims",
+    "0.5.11: stable JWT-SLIM contract (D1 fix)"
+  ],
+  "services": {
+    "zorbit-identity": "0.5.11",
+    "zorbit-authorization": "0.5.11",
+    "zorbit-navigation": "0.5.11",
+    "zorbit-event_bus": "0.5.0",
+    "zorbit-pii-vault": "0.5.0",
+    "zorbit-audit": "0.5.0",
+    "zorbit-cor-module_registry": "0.5.11",
+    "zorbit-cor-deployment_registry": "0.5.0",
+    "zorbit-cor-observability": "0.5.0",
+    "zorbit-cor-secrets_vault": "0.5.0",
+    "_default": "0.5.0"
+  }
+}

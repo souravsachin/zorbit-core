@@ -1,0 +1,250 @@
+{"id":"PRV-00BF","privilege_code":"commissions.view","privilege_label":"View Commissions module","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-0165","privilege_code":"broker.commissions.view","privilege_label":"View broker commissions (RO from slice_of_pie)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-03A3","privilege_code":"secrets_vault.org.secret.rotate","privilege_label":"Rotate Org Secrets (scoped)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-076F","privilege_code":"broker.view","privilege_label":"View Broker module","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-07D2","privilege_code":"platform.secrets.manage","privilege_label":"Platform Secrets Superadmin (cross-module)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-0B34","privilege_code":"secrets_vault.org.secret.delete","privilege_label":"Delete Org Secrets (scoped)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-0F3D","privilege_code":"file_storage.file.download","privilege_label":"Download file contents","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-100","privilege_code":"ai.admin.models","privilege_label":"ai.admin.models","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-101","privilege_code":"ai.admin.ratelimits","privilege_label":"ai.admin.ratelimits","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-102","privilege_code":"authorization.privilege.assign","privilege_label":"authorization.privilege.assign","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-103","privilege_code":"authorization.privilege.create","privilege_label":"authorization.privilege.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-104","privilege_code":"authorization.privilege.delete","privilege_label":"authorization.privilege.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-105","privilege_code":"authorization.privilege.read","privilege_label":"authorization.privilege.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-106","privilege_code":"authorization.privilege.revoke","privilege_label":"authorization.privilege.revoke","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-107","privilege_code":"authorization.privilege.update","privilege_label":"authorization.privilege.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-108","privilege_code":"authorization.role.create","privilege_label":"authorization.role.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-109","privilege_code":"authorization.role.delete","privilege_label":"authorization.role.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-110","privilege_code":"authorization.role.read","privilege_label":"authorization.role.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-111","privilege_code":"authorization.role.update","privilege_label":"authorization.role.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-112","privilege_code":"authorization.userrole.assign","privilege_label":"authorization.userrole.assign","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-113","privilege_code":"authorization.userrole.read","privilege_label":"authorization.userrole.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-114","privilege_code":"authorization.userrole.revoke","privilege_label":"authorization.userrole.revoke","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-115","privilege_code":"deployment.env.manage","privilege_label":"deployment.env.manage","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-116","privilege_code":"deployment.env.read","privilege_label":"deployment.env.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-117","privilege_code":"deployment.request.approve","privilege_label":"deployment.request.approve","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-118","privilege_code":"deployment.request.create","privilege_label":"deployment.request.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-119","privilege_code":"deployment.request.read","privilege_label":"deployment.request.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-120","privilege_code":"deployment.request.reject","privilege_label":"deployment.request.reject","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-121","privilege_code":"identity.auth.impersonate","privilege_label":"identity.auth.impersonate","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-122","privilege_code":"identity.org.admin","privilege_label":"identity.org.admin","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-123","privilege_code":"identity.org.manage","privilege_label":"identity.org.manage","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-124","privilege_code":"identity.org.read","privilege_label":"identity.org.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-125","privilege_code":"identity.session.read","privilege_label":"identity.session.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-126","privilege_code":"identity.session.revoke","privilege_label":"identity.session.revoke","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-127","privilege_code":"identity.user.manage","privilege_label":"identity.user.manage","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-128","privilege_code":"identity.user.read","privilege_label":"identity.user.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-129","privilege_code":"messaging.dlq.discard","privilege_label":"messaging.dlq.discard","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-12CB","privilege_code":"seeder.run.demo","privilege_label":"Run demo seed","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-130","privilege_code":"messaging.dlq.read","privilege_label":"messaging.dlq.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-131","privilege_code":"messaging.dlq.retry","privilege_label":"messaging.dlq.retry","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-132","privilege_code":"messaging.topic.create","privilege_label":"messaging.topic.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-133","privilege_code":"messaging.topic.delete","privilege_label":"messaging.topic.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-134","privilege_code":"messaging.topic.read","privilege_label":"messaging.topic.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-135","privilege_code":"navigation.menu.delete","privilege_label":"navigation.menu.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-136","privilege_code":"navigation.menu.read","privilege_label":"navigation.menu.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-137","privilege_code":"navigation.menu.update","privilege_label":"navigation.menu.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-138","privilege_code":"navigation.module.read","privilege_label":"navigation.module.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-139","privilege_code":"navigation.module.register","privilege_label":"navigation.module.register","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-140","privilege_code":"navigation.module.unregister","privilege_label":"navigation.module.unregister","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-143","privilege_code":"customer.create","privilege_label":"customer.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-144","privilege_code":"customer.delete","privilege_label":"customer.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-145","privilege_code":"piivault.token.create","privilege_label":"piivault.token.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-146","privilege_code":"piivault.token.delete","privilege_label":"piivault.token.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-147","privilege_code":"piivault.token.read","privilege_label":"piivault.token.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-148","privilege_code":"piivault.visibility.create","privilege_label":"piivault.visibility.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-149","privilege_code":"piivault.visibility.delete","privilege_label":"piivault.visibility.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-150","privilege_code":"piivault.visibility.read","privilege_label":"piivault.visibility.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-151","privilege_code":"piivault.visibility.update","privilege_label":"piivault.visibility.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-153","privilege_code":"registry.module.admin","privilege_label":"registry.module.admin","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-154","privilege_code":"registry.module.read","privilege_label":"registry.module.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-155","privilege_code":"secrets_vault.org.secret.manage","privilege_label":"secrets_vault.org.secret.manage","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-156","privilege_code":"secrets_vault.org.secret.read","privilege_label":"secrets_vault.org.secret.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-162","privilege_code":"file_viewer.view","privilege_label":"file_viewer.view","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-1766","privilege_code":"observability.logs.read","privilege_label":"Read Platform Logs","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-181","privilege_code":"hidecisioning.evaluations.execute","privilege_label":"hidecisioning.evaluations.execute","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-182","privilege_code":"hidecisioning.evaluations.read","privilege_label":"hidecisioning.evaluations.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-183","privilege_code":"hidecisioning.fields.read","privilege_label":"hidecisioning.fields.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-184","privilege_code":"hidecisioning.loadingtables.create","privilege_label":"hidecisioning.loadingtables.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-185","privilege_code":"hidecisioning.loadingtables.delete","privilege_label":"hidecisioning.loadingtables.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-186","privilege_code":"hidecisioning.loadingtables.read","privilege_label":"hidecisioning.loadingtables.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-187","privilege_code":"hidecisioning.loadingtables.update","privilege_label":"hidecisioning.loadingtables.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-188","privilege_code":"hidecisioning.rules.create","privilege_label":"hidecisioning.rules.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-189","privilege_code":"hidecisioning.rules.delete","privilege_label":"hidecisioning.rules.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-190","privilege_code":"hidecisioning.rules.read","privilege_label":"hidecisioning.rules.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-191","privilege_code":"hidecisioning.rules.update","privilege_label":"hidecisioning.rules.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-192","privilege_code":"hidecisioning.stpcriteria.create","privilege_label":"hidecisioning.stpcriteria.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-193","privilege_code":"hidecisioning.stpcriteria.delete","privilege_label":"hidecisioning.stpcriteria.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-194","privilege_code":"hidecisioning.stpcriteria.read","privilege_label":"hidecisioning.stpcriteria.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-195","privilege_code":"hidecisioning.stpcriteria.update","privilege_label":"hidecisioning.stpcriteria.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-196","privilege_code":"hiquotation.analytics.read","privilege_label":"hiquotation.analytics.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-197","privilege_code":"hiquotation.documents.create","privilege_label":"hiquotation.documents.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-198","privilege_code":"hiquotation.documents.read","privilege_label":"hiquotation.documents.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-199","privilege_code":"hiquotation.leads.create","privilege_label":"hiquotation.leads.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-1ADF","privilege_code":"hi_retail_quotation.quotation.create","privilege_label":"Create retail quotations","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-200","privilege_code":"hiquotation.mafquestions.create","privilege_label":"hiquotation.mafquestions.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-201","privilege_code":"hiquotation.mafquestions.read","privilege_label":"hiquotation.mafquestions.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-202","privilege_code":"hiquotation.mafquestions.update","privilege_label":"hiquotation.mafquestions.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-203","privilege_code":"hiquotation.members.create","privilege_label":"hiquotation.members.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-204","privilege_code":"hiquotation.members.delete","privilege_label":"hiquotation.members.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-205","privilege_code":"hiquotation.members.update","privilege_label":"hiquotation.members.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-206","privilege_code":"hiquotation.queries.create","privilege_label":"hiquotation.queries.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-207","privilege_code":"hiquotation.queries.update","privilege_label":"hiquotation.queries.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-208","privilege_code":"hiquotation.quotations.create","privilege_label":"hiquotation.quotations.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-209","privilege_code":"hiquotation.quotations.delete","privilege_label":"hiquotation.quotations.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-210","privilege_code":"hiquotation.quotations.read","privilege_label":"hiquotation.quotations.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-211","privilege_code":"hiquotation.quotations.submit","privilege_label":"hiquotation.quotations.submit","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-212","privilege_code":"hiquotation.quotations.update","privilege_label":"hiquotation.quotations.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-213","privilege_code":"hiquotation.regions.read","privilege_label":"hiquotation.regions.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-222","privilege_code":"medical_coding.read","privilege_label":"medical_coding.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2231","privilege_code":"hi_sme_quotation.setup.admin","privilege_label":"Administer HI SME Quotation setup and seeds","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2257","privilege_code":"hi_retail_quotation.quotation.read","privilege_label":"Read all retail quotations","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2344","privilege_code":"seeder.db.seed.system-min","privilege_label":"Seed Seeder's own minimal data","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-239","privilege_code":"payment_gateway.attempt","privilege_label":"payment_gateway.attempt","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-240","privilege_code":"pcg4.benefits.create","privilege_label":"pcg4.benefits.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-241","privilege_code":"pcg4.benefits.delete","privilege_label":"pcg4.benefits.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-242","privilege_code":"pcg4.benefits.read","privilege_label":"pcg4.benefits.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-243","privilege_code":"pcg4.benefits.update","privilege_label":"pcg4.benefits.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-244","privilege_code":"pcg4.configurations.create","privilege_label":"pcg4.configurations.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-245","privilege_code":"pcg4.configurations.delete","privilege_label":"pcg4.configurations.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2459","privilege_code":"observability.db.seed","privilege_label":"Seed Observability minimal data","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-246","privilege_code":"pcg4.configurations.read","privilege_label":"pcg4.configurations.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-247","privilege_code":"pcg4.configurations.update","privilege_label":"pcg4.configurations.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-248","privilege_code":"pcg4.encounters.create","privilege_label":"pcg4.encounters.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-249","privilege_code":"pcg4.encounters.delete","privilege_label":"pcg4.encounters.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-250","privilege_code":"pcg4.encounters.read","privilege_label":"pcg4.encounters.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-251","privilege_code":"pcg4.encounters.update","privilege_label":"pcg4.encounters.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-252","privilege_code":"pcg4.plans.create","privilege_label":"pcg4.plans.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-253","privilege_code":"pcg4.plans.delete","privilege_label":"pcg4.plans.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-254","privilege_code":"pcg4.plans.read","privilege_label":"pcg4.plans.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-255","privilege_code":"pcg4.plans.update","privilege_label":"pcg4.plans.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-256","privilege_code":"pcg4.setup.read","privilege_label":"pcg4.setup.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-257","privilege_code":"pcg5.benefits.create","privilege_label":"pcg5.benefits.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-258","privilege_code":"pcg5.benefits.delete","privilege_label":"pcg5.benefits.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-259","privilege_code":"pcg5.benefits.read","privilege_label":"pcg5.benefits.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-260","privilege_code":"pcg5.benefits.update","privilege_label":"pcg5.benefits.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-261","privilege_code":"pcg5.configurations.create","privilege_label":"pcg5.configurations.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-262","privilege_code":"pcg5.configurations.delete","privilege_label":"pcg5.configurations.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-263","privilege_code":"pcg5.configurations.read","privilege_label":"pcg5.configurations.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-264","privilege_code":"pcg5.configurations.update","privilege_label":"pcg5.configurations.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-265","privilege_code":"pcg5.encounters.create","privilege_label":"pcg5.encounters.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-266","privilege_code":"pcg5.encounters.delete","privilege_label":"pcg5.encounters.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-267","privilege_code":"pcg5.encounters.read","privilege_label":"pcg5.encounters.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-268","privilege_code":"pcg5.encounters.update","privilege_label":"pcg5.encounters.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-269","privilege_code":"pcg5.plans.create","privilege_label":"pcg5.plans.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-270","privilege_code":"pcg5.plans.delete","privilege_label":"pcg5.plans.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-271","privilege_code":"pcg5.plans.read","privilege_label":"pcg5.plans.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-272","privilege_code":"pcg5.plans.update","privilege_label":"pcg5.plans.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-273","privilege_code":"pcg5.setup.read","privilege_label":"pcg5.setup.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2763","privilege_code":"broker.employee.read","privilege_label":"Read Broker Employees","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2854","privilege_code":"file_storage.file.delete","privilege_label":"Delete (soft) a file","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-299","privilege_code":"tele_uw.admin","privilege_label":"tele_uw.admin","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2B32","privilege_code":"commissions.setup.admin","privilege_label":"Administer Commissions setup and seeds","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2BD4","privilege_code":"seeder.run.demo.delete","privilege_label":"Delete demo data (DEMO- prefixed)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2CAD","privilege_code":"hi_retail_quotation.setup.admin","privilege_label":"Administer HI Retail Quotation setup and seeds","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2CB5","privilege_code":"hi_retail_quotation.quotation.manage","privilege_label":"Update/Delete retail quotations","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-2D99","privilege_code":"deployment.db.seed.system-min","privilege_label":"Seed Deployment Registry minimal data","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-300","privilege_code":"tele_uw.call.initiate","privilege_label":"tele_uw.call.initiate","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-301","privilege_code":"tele_uw.call.read","privilege_label":"tele_uw.call.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-302","privilege_code":"tele_uw.campaign.manage","privilege_label":"tele_uw.campaign.manage","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-303","privilege_code":"tele_uw.campaign.read","privilege_label":"tele_uw.campaign.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-304","privilege_code":"tele_uw.dialogue.annotate","privilege_label":"tele_uw.dialogue.annotate","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-305","privilege_code":"tele_uw.dialogue.read","privilege_label":"tele_uw.dialogue.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-306","privilege_code":"uwworkflow.actions.create","privilege_label":"uwworkflow.actions.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-307","privilege_code":"uwworkflow.actions.delete","privilege_label":"uwworkflow.actions.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-308","privilege_code":"uwworkflow.actions.execute","privilege_label":"uwworkflow.actions.execute","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-309","privilege_code":"uwworkflow.actions.read","privilege_label":"uwworkflow.actions.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-310","privilege_code":"uwworkflow.actions.update","privilege_label":"uwworkflow.actions.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-311","privilege_code":"uwworkflow.assignmentrules.create","privilege_label":"uwworkflow.assignmentrules.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-312","privilege_code":"uwworkflow.assignmentrules.delete","privilege_label":"uwworkflow.assignmentrules.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-313","privilege_code":"uwworkflow.assignmentrules.read","privilege_label":"uwworkflow.assignmentrules.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-314","privilege_code":"uwworkflow.assignmentrules.update","privilege_label":"uwworkflow.assignmentrules.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-3144","privilege_code":"file_storage.setup.admin","privilege_label":"Administer File Storage setup and seeds","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-315","privilege_code":"uwworkflow.assignments.create","privilege_label":"uwworkflow.assignments.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-316","privilege_code":"uwworkflow.assignments.delete","privilege_label":"uwworkflow.assignments.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-317","privilege_code":"uwworkflow.escalationrules.create","privilege_label":"uwworkflow.escalationrules.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-318","privilege_code":"uwworkflow.escalationrules.delete","privilege_label":"uwworkflow.escalationrules.delete","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-319","privilege_code":"uwworkflow.escalationrules.read","privilege_label":"uwworkflow.escalationrules.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-320","privilege_code":"uwworkflow.escalationrules.update","privilege_label":"uwworkflow.escalationrules.update","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-321","privilege_code":"uwworkflow.escalations.execute","privilege_label":"uwworkflow.escalations.execute","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-322","privilege_code":"uwworkflow.history.read","privilege_label":"uwworkflow.history.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-323","privilege_code":"uwworkflow.ingest.create","privilege_label":"uwworkflow.ingest.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-324","privilege_code":"uwworkflow.payments.create","privilege_label":"uwworkflow.payments.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-325","privilege_code":"uwworkflow.payments.read","privilege_label":"uwworkflow.payments.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-326","privilege_code":"uwworkflow.policies.create","privilege_label":"uwworkflow.policies.create","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-327","privilege_code":"uwworkflow.policies.read","privilege_label":"uwworkflow.policies.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-328","privilege_code":"uwworkflow.queues.read","privilege_label":"uwworkflow.queues.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-329","privilege_code":"uwworkflow.quotes.read","privilege_label":"uwworkflow.quotes.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-3530","privilege_code":"secrets_vault.platform.secret.delete","privilege_label":"Delete Platform Secrets","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-3692","privilege_code":"hi_sme_quotation.client.read","privilege_label":"Read SME clients","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-39BD","privilege_code":"seeder.run","privilege_label":"Trigger seed runs","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-3C68","privilege_code":"secrets_vault.audit.read","privilege_label":"View Secret Access Audit","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-3EDF","privilege_code":"deployment.request.rollback","privilege_label":"Rollback Applied Deployment","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-4098","privilege_code":"file_storage.access_log.read","privilege_label":"Read the file access log","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-418D","privilege_code":"secrets_vault.platform.secret.read","privilege_label":"Read Platform Secrets","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-4D01","privilege_code":"hi_sme_quotation.quotation.manage","privilege_label":"Update/Delete SME quotations and compute pricing","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-4EA4","privilege_code":"secrets_vault.platform.secret.manage","privilege_label":"Create/Update Platform Secrets","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-51DC","privilege_code":"hi_sme_quotation.census.upload","privilege_label":"Upload new bulk census rosters","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-583F","privilege_code":"hi_retail_quotation.view","privilege_label":"View HI Retail Quotation module","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-58EE","privilege_code":"hi_sme_quotation.quotation.create","privilege_label":"Create SME quotations","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-5A7A","privilege_code":"broker.org.read","privilege_label":"Read Broker Organizations","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-5BA7","privilege_code":"deployment.event.read","privilege_label":"View Audit Timeline","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-5CFB","privilege_code":"hi_sme_quotation.census.read","privilege_label":"Read bulk censuses and members","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-5F27","privilege_code":"file_storage.file.manage","privilege_label":"Rename, retag, and change access policy on a file","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-5F57","privilege_code":"file_storage.grant.read","privilege_label":"Read access grants on a file","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-7083","privilege_code":"product_pricing.view","privilege_label":"View Product Pricing module","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-7464","privilege_code":"product_pricing.rate_card.read","privilege_label":"Read Rate Cards","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-7D33","privilege_code":"hi_retail_quotation.proposer.manage","privilege_label":"Create/Update/Delete retail proposers and members","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-7F94","privilege_code":"hi_retail_quotation.proposer.read","privilege_label":"Read retail proposers and members","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-815C","privilege_code":"file_storage.file.read","privilege_label":"List and view file metadata","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-8236","privilege_code":"hi_sme_quotation.quotation.read","privilege_label":"Read SME quotations","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-836F","privilege_code":"commissions.ledger.manage","privilege_label":"Create/Update/Delete Commission Ledger entries","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-8533","privilege_code":"commissions.rule.read","privilege_label":"Read Commission Rules","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-8539","privilege_code":"commissions.rule.manage","privilege_label":"Create/Update/Delete Commission Rules","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-88AE","privilege_code":"secrets_vault.platform.secret.rotate","privilege_label":"Rotate Platform Secrets","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-8AE7","privilege_code":"product_pricing.price_tier.read","privilege_label":"Read Price Tiers","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-8ECD","privilege_code":"seeder.stream.subscribe","privilege_label":"Subscribe to SSE seed stream","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-95E8","privilege_code":"product_pricing.rate_card.manage","privilege_label":"Create/Update/Delete Rate Cards","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-965B","privilege_code":"file_storage.file.upload","privilege_label":"Upload new files","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-9C7A","privilege_code":"hi_sme_quotation.client.manage","privilege_label":"Create/Update/Delete SME clients","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-9D38","privilege_code":"product_pricing.setup.admin","privilege_label":"Administer Product Pricing setup and seeds","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-A1F1","privilege_code":"deployment.request.apply","privilege_label":"Apply Approved Deployment (Applier)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-AB18","privilege_code":"hi_retail_quotation.quotation.own_only","privilege_label":"Read only self-authored quotations (agent mode)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-AC67","privilege_code":"broker.org.manage","privilege_label":"Create/Update/Delete Broker Organizations","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-ADMIN","privilege_code":"platform.admin.all","privilege_label":"Super Admin (all access)","section_id":"SEC-PLAT","icon":"shield-check","visible_in_menu":true,"seq_number":0}
+{"id":"PRV-AUDIT","privilege_code":"core.audit.read","privilege_label":"Audit — read","section_id":"SEC-CORE","icon":"file-text","visible_in_menu":true,"seq_number":2}
+{"id":"PRV-AUDIT_LOG_EXPORT","privilege_code":"audit.log.export","privilege_label":"audit.log.export","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-AUDIT_LOG_READ","privilege_code":"audit.log.read","privilege_label":"audit.log.read","section_id":"SEC-PLAT","icon":"shield","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-AUDV","privilege_code":"audit.view","privilege_label":"Audit Log","section_id":"SEC-CORE","icon":"history","visible_in_menu":true,"seq_number":3}
+{"id":"PRV-B0CB","privilege_code":"file_storage.grant.manage","privilege_label":"Create and revoke access grants","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-B28B","privilege_code":"hi_sme_quotation.census.manage","privilege_label":"Create/Update/Delete bulk censuses and members","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-B37B","privilege_code":"observability.metrics.read","privilege_label":"Read Platform Metrics","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-B713","privilege_code":"seeder.bundles.deliver","privilege_label":"Deliver a seed bundle into a module's seed directory","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-BBC7","privilege_code":"commissions.reports.view","privilege_label":"View commission summary reports","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-BC20","privilege_code":"seeder.bundles.run","privilege_label":"Execute a seed bundle against module APIs","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-C233","privilege_code":"secrets_vault.db.seed.system-min","privilege_label":"Seed Secrets Vault minimal data","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-C2A5","privilege_code":"commissions.ledger.read","privilege_label":"Read Commission Ledger","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-C2C4","privilege_code":"hi_sme_quotation.quotation.bind","privilege_label":"Bind a quotation (terminal success)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-C307","privilege_code":"seeder.bundles.read","privilege_label":"Read seed bundles + factor catalog","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-C3C5","privilege_code":"observability.traces.read","privilege_label":"Read Platform Traces","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-C548","privilege_code":"product_pricing.price_tier.manage","privilege_label":"Create/Update/Delete Price Tiers","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-C70B","privilege_code":"hi_retail_quotation.quotation.issue","privilege_label":"Transition quotation to issued (terminal)","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-C833","privilege_code":"seeder.bundles.write","privilege_label":"Create / edit / delete seed bundles","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-CD7E","privilege_code":"seeder.run.system-min","privilege_label":"Run system-min seed","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-CF9C","privilege_code":"broker.employee.manage","privilege_label":"Create/Update/Delete Broker Employees","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-DASH","privilege_code":"dashboard.view","privilege_label":"Dashboard","section_id":"SEC-PLAT","icon":"home","visible_in_menu":true,"seq_number":0}
+{"id":"PRV-DATA","privilege_code":"pfs.datatable.read","privilege_label":"DataTable","section_id":"SEC-PFS","icon":"table","visible_in_menu":true,"seq_number":0}
+{"id":"PRV-E613","privilege_code":"broker.setup.admin","privilege_label":"Administer Broker setup and seeds","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-EC45","privilege_code":"hi_sme_quotation.view","privilege_label":"View HI SME Quotation module","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-F021","privilege_code":"seeder.guide.read","privilege_label":"View Seeder Guide","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-F9D5","privilege_code":"seeder.runs.read","privilege_label":"View seed run history","section_id":"SEC-PLAT","icon":"","visible_in_menu":false,"seq_number":0}
+{"id":"PRV-FORM","privilege_code":"pfs.form_builder.read","privilege_label":"Form Builder","section_id":"SEC-PFS","icon":"edit","visible_in_menu":true,"seq_number":1}
+{"id":"PRV-IDENTITY","privilege_code":"core.identity.read","privilege_label":"Identity — read","section_id":"SEC-CORE","icon":"users","visible_in_menu":true,"seq_number":0}
+{"id":"PRV-NAV","privilege_code":"core.navigation.read","privilege_label":"Navigation — read","section_id":"SEC-CORE","icon":"compass","visible_in_menu":true,"seq_number":1}
+{"id":"PRV-ORG","privilege_code":"identity.organizations.view","privilege_label":"Organizations","section_id":"SEC-CORE","icon":"business","visible_in_menu":true,"seq_number":1}
+{"id":"PRV-PCG4","privilege_code":"app.pcg4.read","privilege_label":"PCG4","section_id":"SEC-APPS","icon":"cube","visible_in_menu":true,"seq_number":0}
+{"id":"PRV-PMJAY","privilege_code":"app.claims_core.read","privilege_label":"Claims Core","section_id":"SEC-APPS","icon":"shield-medical","visible_in_menu":true,"seq_number":1}
+{"id":"PRV-SEED","privilege_code":"platform.seed.execute","privilege_label":"Run seeders","section_id":"SEC-PLAT","icon":"database","visible_in_menu":false,"seq_number":1}
+{"id":"PRV-SESS","privilege_code":"identity.sessions.view","privilege_label":"Sessions","section_id":"SEC-CORE","icon":"devices","visible_in_menu":true,"seq_number":2}
+{"id":"PRV-SETT","privilege_code":"admin.settings.view","privilege_label":"Admin Settings","section_id":"SEC-PLAT","icon":"settings","visible_in_menu":true,"seq_number":1}
+{"id":"PRV-USR","privilege_code":"identity.users.view","privilege_label":"Users","section_id":"SEC-CORE","icon":"people","visible_in_menu":true,"seq_number":0}
