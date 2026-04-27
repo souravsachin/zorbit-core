@@ -1,0 +1,14 @@
+{
+  "$schema": "./slug-translations.index.schema.json",
+  "version": "3.0.0",
+  "lastUpdated": "2026-04-28",
+  "purpose": "Index of available slug-translation language files. Layer-1 defaults shipped with the platform. Default language at install time = en. Per-deployment override files (Layer 2) live under /etc/zorbit/<env>/slug-translations.<lang>.override.json. Runtime DB overrides (Layer 3) carry an explicit language column. Resolver merges Layer 3 > Layer 2 > Layer 1, with per-language fallback to defaultLanguage if a key is missing.",
+  "owner-directive-2026-04-28": "Manifests stay slug-only AND language-agnostic. Never bake a language into a manifest. The SPA picks user language at request time and the navigation service serves the merged translations.",
+  "defaultLanguage": "en",
+  "languages": [
+    { "code": "en", "label": "English",          "rtl": false, "file": "./en.json", "complete": true }
+  ],
+  "futureLanguages": [
+    "es", "fr", "de", "pt", "hi", "ar", "zh-Hans", "ja"
+  ]
+}
