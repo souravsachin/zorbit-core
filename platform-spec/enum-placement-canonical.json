@@ -1,0 +1,225 @@
+{
+  "$schema": "./enum-placement-canonical.schema.json",
+  "version": "1.1.0",
+  "lastUpdated": "2026-04-27",
+  "source": "Backed by static menu snapshot at 00_docs/platform/static-menu-6level-snapshot.json (originally src/data/menu-6level.json in zorbit-unified-console).",
+  "purpose": "Authoritative enum of every legal value for placement.scaffold / placement.businessLine / placement.capabilityArea declared by any service manifest. Validated at build time and at post-deploy. Drift = build/install fails. Twice-daily fresh installs depend on this being the single source of truth.",
+
+  "scaffold": {
+    "description": "L1 sidebar bucket. Each service manifest declares exactly one. The cascade resolver produces this as the L1 group label.",
+    "values": [
+      "Core Platform Services",
+      "Platform Capabilities",
+      "Business Lines (Insurance)",
+      "Agentic Calling",
+      "Support Center",
+      "User Profile & Preferences",
+      "Developer Center"
+    ],
+    "synonyms": {
+      "Platform Core": "Core Platform Services",
+      "PLATFORM CORE": "Core Platform Services",
+      "Cor": "Core Platform Services",
+      "Platform Feature Services": "Platform Capabilities",
+      "PFS": "Platform Capabilities",
+      "PLATFORM FEATURE SERVICES": "Platform Capabilities",
+      "Foundational Services": "Platform Capabilities",
+      "Business": "Business Lines (Insurance)",
+      "BUSINESS": "Business Lines (Insurance)",
+      "Insurance": "Business Lines (Insurance)",
+      "AI": "Agentic Calling",
+      "AI & Automation": "Agentic Calling",
+      "Help & Support": "Support Center",
+      "Help": "Support Center",
+      "Administration": "User Profile & Preferences",
+      "Other": "Developer Center"
+    }
+  },
+
+  "businessLine": {
+    "description": "L2 inside the Business Lines (Insurance) scaffold ONLY. Ignored for other scaffolds. Owner directive MSG-101/MSG-105 (2026-04-27): Finance and Reports & Analytics are first-class L2 lines under Business — do NOT collapse them into Compliance & Risk.",
+    "appliesTo": "Business Lines (Insurance)",
+    "values": [
+      "Distribution Side",
+      "Servicing Side",
+      "Finance",
+      "Reports & Analytics",
+      "Compliance & Risk",
+      "FWA (Fraud, Waste, Abuse)"
+    ],
+    "synonyms": {
+      "Distribution": "Distribution Side",
+      "distribution": "Distribution Side",
+      "Servicing": "Servicing Side",
+      "servicing": "Servicing Side",
+      "finance": "Finance",
+      "reports_and_analytics": "Reports & Analytics",
+      "Reporting & Analytics": "Reports & Analytics",
+      "Compliance": "Compliance & Risk",
+      "Risk": "Compliance & Risk",
+      "compliance": "Compliance & Risk",
+      "FWA": "FWA (Fraud, Waste, Abuse)",
+      "fwa": "FWA (Fraud, Waste, Abuse)",
+      "Fraud Waste Abuse": "FWA (Fraud, Waste, Abuse)"
+    }
+  },
+
+  "capabilityArea": {
+    "description": "L3 grouping below either an L1 (for non-Business scaffolds) or an L2 Business Line (under Business). Each scaffold has its own list. A value not in the list for that scaffold is rejected at build time.",
+    "byScaffold": {
+      "Core Platform Services": [
+        "Identity",
+        "Authorization",
+        "Navigation",
+        "Event Bus (Messaging)",
+        "Audit",
+        "PII Vault",
+        "Secrets Vault",
+        "PII Showcase",
+        "Verification"
+      ],
+      "Platform Capabilities": [
+        "DataTable Engine",
+        "Form Builder",
+        "Workflow Engine (FQP)",
+        "AI Gateway",
+        "Realtime (WebRTC / Chat)",
+        "Interaction Recorder",
+        "Notification Service",
+        "Integration Service",
+        "Organization Directory"
+      ],
+      "Business Lines (Insurance)": {
+        "Distribution Side": [
+          "Product Management",
+          "PAS - Retail (Individual)",
+          "PAS - Group / Corporate"
+        ],
+        "Servicing Side": [
+          "Network Management",
+          "Claims Management",
+          "Customer Servicing"
+        ],
+        "Finance": [
+          "Claim Payment Reconciliation",
+          "Premium Collection",
+          "Commissions"
+        ],
+        "Reports & Analytics": [
+          "Reporting & Analytics",
+          "Dashboards"
+        ],
+        "Compliance & Risk": [
+          "Compliance",
+          "Risk"
+        ],
+        "FWA (Fraud, Waste, Abuse)": [
+          "RPA Integration",
+          "API Integration"
+        ]
+      },
+      "Agentic Calling": [
+        "Jayna AI Calling",
+        "Voice Engine"
+      ],
+      "Support Center": [
+        "Platform Support",
+        "API Documentation",
+        "Demo & Training",
+        "Help & Documentation",
+        "Submit a Ticket",
+        "Community Forum",
+        "Video Tutorials",
+        "API Reference"
+      ],
+      "User Profile & Preferences": [
+        "Settings",
+        "Administration",
+        "Dashboard"
+      ],
+      "Developer Center": [
+        "API Explorer",
+        "SDK Downloads",
+        "Code Samples",
+        "Webhooks",
+        "Developer Console",
+        "Platform Status"
+      ]
+    }
+  },
+
+  "moduleAlias": {
+    "description": "Soft mapping of moduleId → preferred (scaffold, capabilityArea[, businessLine]) — used by the post-deploy patcher when a service manifest is missing or wrong. Hand-curated; auto-corrects drift between repo names and canonical labels.",
+    "mappings": {
+      "zorbit-cor-identity":              {"scaffold": "Core Platform Services", "capabilityArea": "Identity"},
+      "zorbit-cor-authorization":         {"scaffold": "Core Platform Services", "capabilityArea": "Authorization"},
+      "zorbit-cor-navigation":            {"scaffold": "Core Platform Services", "capabilityArea": "Navigation"},
+      "zorbit-cor-event_bus":             {"scaffold": "Core Platform Services", "capabilityArea": "Event Bus (Messaging)"},
+      "zorbit-cor-audit":                 {"scaffold": "Core Platform Services", "capabilityArea": "Audit"},
+      "zorbit-cor-pii_vault":             {"scaffold": "Core Platform Services", "capabilityArea": "PII Vault"},
+      "zorbit-cor-secrets_vault":         {"scaffold": "Core Platform Services", "capabilityArea": "Secrets Vault"},
+      "zorbit-cor-observability":         {"scaffold": "Developer Center",       "capabilityArea": "Platform Status"},
+      "zorbit-cor-module_registry":       {"scaffold": "Developer Center",       "capabilityArea": "Developer Console"},
+      "zorbit-cor-deployment_registry":   {"scaffold": "Developer Center",       "capabilityArea": "Developer Console"},
+      "zorbit-pfs-datatable":             {"scaffold": "Platform Capabilities",  "capabilityArea": "DataTable Engine"},
+      "zorbit-pfs-form_builder":          {"scaffold": "Platform Capabilities",  "capabilityArea": "Form Builder"},
+      "zorbit-pfs-workflow_engine":       {"scaffold": "Platform Capabilities",  "capabilityArea": "Workflow Engine (FQP)"},
+      "zorbit-pfs-ai_gateway":            {"scaffold": "Platform Capabilities",  "capabilityArea": "AI Gateway"},
+      "zorbit-pfs-rtc":                   {"scaffold": "Platform Capabilities",  "capabilityArea": "Realtime (WebRTC / Chat)"},
+      "zorbit-pfs-chat":                  {"scaffold": "Platform Capabilities",  "capabilityArea": "Realtime (WebRTC / Chat)"},
+      "zorbit-pfs-realtime":              {"scaffold": "Platform Capabilities",  "capabilityArea": "Realtime (WebRTC / Chat)"},
+      "zorbit-pfs-interaction_recorder":  {"scaffold": "Platform Capabilities",  "capabilityArea": "Interaction Recorder"},
+      "zorbit-pfs-notification":          {"scaffold": "Platform Capabilities",  "capabilityArea": "Notification Service"},
+      "zorbit-pfs-integration":           {"scaffold": "Platform Capabilities",  "capabilityArea": "Integration Service"},
+      "zorbit-pfs-api_integration":       {"scaffold": "Business Lines (Insurance)", "businessLine": "FWA (Fraud, Waste, Abuse)", "capabilityArea": "API Integration"},
+      "zorbit-pfs-rpa_integration":       {"scaffold": "Business Lines (Insurance)", "businessLine": "FWA (Fraud, Waste, Abuse)", "capabilityArea": "RPA Integration"},
+      "zorbit-pfs-analytics_reporting":   {"scaffold": "Business Lines (Insurance)", "businessLine": "Reports & Analytics", "capabilityArea": "Reporting & Analytics"},
+      "zorbit-pfs-medical_coding":        {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Network Management"},
+      "zorbit-pfs-payment_gateway":       {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-pfs-kyc":                   {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-pfs-verification":          {"scaffold": "Core Platform Services", "capabilityArea": "Verification"},
+      "zorbit-pfs-doc_generator":         {"scaffold": "Platform Capabilities",  "capabilityArea": "Form Builder"},
+      "zorbit-pfs-file_storage":          {"scaffold": "Platform Capabilities",  "capabilityArea": "Integration Service"},
+      "zorbit-pfs-file_viewer":           {"scaffold": "Platform Capabilities",  "capabilityArea": "Form Builder"},
+      "zorbit-pfs-pixel":                 {"scaffold": "Platform Capabilities",  "capabilityArea": "DataTable Engine"},
+      "zorbit-pfs-rules_engine":          {"scaffold": "Platform Capabilities",  "capabilityArea": "Workflow Engine (FQP)"},
+      "zorbit-pfs-secrets":               {"scaffold": "Core Platform Services", "capabilityArea": "Secrets Vault"},
+      "zorbit-pfs-seeder":                {"scaffold": "Developer Center",       "capabilityArea": "Developer Console"},
+      "zorbit-pfs-voice":                 {"scaffold": "Agentic Calling",        "capabilityArea": "Voice Engine"},
+      "zorbit-pfs-voice_engine":          {"scaffold": "Agentic Calling",        "capabilityArea": "Voice Engine"},
+      "zorbit-pfs-white_label":           {"scaffold": "User Profile & Preferences", "capabilityArea": "Settings"},
+      "zorbit-pfs-zmb_factory":           {"scaffold": "Developer Center",       "capabilityArea": "Code Samples"},
+      "zorbit-app-pcg4":                  {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "Product Management"},
+      "zorbit-app-pcg5":                  {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "Product Management"},
+      "zorbit-app-product_pricing":       {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "Product Management"},
+      "zorbit-app-hi_quotation":          {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-hi_retail_quotation":   {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-hi_sme_quotation":      {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Group / Corporate"},
+      "zorbit-app-mi_quotation":          {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-broker":                {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-hi_uw_decisioning":     {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-uw_workflow":           {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-hi_claim_initiation":   {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Claims Management"},
+      "zorbit-app-hi_claim_decisioning":  {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Claims Management"},
+      "zorbit-app-hi_claim_adjudication_workflow": {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Claims Management"},
+      "zorbit-app-hi_claim_payment_recon": {"scaffold": "Business Lines (Insurance)", "businessLine": "Finance", "capabilityArea": "Claim Payment Reconciliation"},
+      "zorbit-app-claims_core":           {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Claims Management"},
+      "zorbit-app-claims_intake":         {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Claims Management"},
+      "zorbit-app-network_empanelment_application": {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Network Management"},
+      "zorbit-app-network_empanelment_workflow":    {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Network Management"},
+      "zorbit-app-hi_customer_portal":    {"scaffold": "Business Lines (Insurance)", "businessLine": "Servicing Side", "capabilityArea": "Customer Servicing"},
+      "zorbit-app-jayna":                 {"scaffold": "Agentic Calling",        "capabilityArea": "Jayna AI Calling"},
+      "zorbit-app-slice_of_pie":          {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-prospect_portal":       {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-sample":                {"scaffold": "Developer Center",       "capabilityArea": "Code Samples"},
+      "zorbit-app-sample_module":         {"scaffold": "Developer Center",       "capabilityArea": "Code Samples"},
+      "zorbit-app-zmb_selftest":          {"scaffold": "Developer Center",       "capabilityArea": "Developer Console"},
+      "zorbit-app-help_support":          {"scaffold": "Support Center",         "capabilityArea": "Submit a Ticket"},
+      "zorbit-app-manufacturing_demo":    {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Group / Corporate"},
+      "zorbit-app-retail_banking_demo":   {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "zorbit-app-wealth_mgmt_demo":      {"scaffold": "Business Lines (Insurance)", "businessLine": "Distribution Side", "capabilityArea": "PAS - Retail (Individual)"},
+      "sample-customer-service":          {"scaffold": "Developer Center",       "capabilityArea": "Code Samples"},
+      "zorbit-ai-tele_uw":                {"scaffold": "Agentic Calling",        "capabilityArea": "Jayna AI Calling"}
+    }
+  }
+}
