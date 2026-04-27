@@ -293,9 +293,19 @@
       "type": "object",
       "required": ["label", "sortOrder", "items"],
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "Section identifier. When set to one of the canonical group ids ('guide', 'data', 'setup', 'deployment'), the SPA renders the section as a named wrapper node nested under the module. Other ids render flat (back-compat).",
+          "examples": ["guide", "data", "setup", "deployment", "identity", "operations"]
+        },
+        "groupId": {
+          "type": "string",
+          "enum": ["guide", "data", "setup", "deployment"],
+          "description": "Optional explicit canonical group id. Overrides the section's `id` for grouping purposes. Use when you want a custom section label but still want the SPA to nest items under the canonical wrapper. When neither `groupId` nor a canonical `id` is set, the section renders flat under the module."
+        },
         "label": {
           "type": "string",
-          "description": "Display label for the menu section."
+          "description": "Display label for the menu section. When the section is a canonical group, this label is shown on the group wrapper node (e.g. 'Guide', 'Data', 'Setup', 'Deployment')."
         },
         "icon": {
           "type": "string",
@@ -345,6 +355,15 @@
         "icon": {
           "type": "string",
           "description": "Icon for this specific menu item."
+        },
+        "feComponent": {
+          "type": "string",
+          "description": "Frontend component reference, in the form `<bundle>:<component>` or `@platform:<component>`. Used by the SPA to mount the right widget for the route. The platform special-cases @platform:Guide* component names to nest items under the Guide group when the manifest does not set a section id."
+        },
+        "groupId": {
+          "type": "string",
+          "enum": ["guide", "data", "setup", "deployment"],
+          "description": "Optional canonical group id at the item level. When set, the item is moved into the named group wrapper regardless of which manifest section declared it. Useful for one-off items (e.g. a single 'DB Operations' link) without creating a whole section. Items inside a section already tagged with a canonical id/groupId inherit the section's group; the item-level field overrides."
         },
         "visibleInMenu": {
           "type": "boolean",
