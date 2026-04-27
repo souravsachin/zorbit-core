@@ -1,0 +1,98 @@
+{
+  "$schema": "./placement-canonical-mapping.schema.json",
+  "version": "1.0.0",
+  "lastUpdated": "2026-04-27",
+  "purpose": "Synonym table for canonicalising placement.scaffold / placement.businessLine values inside service manifests. Maps legacy display-name strings (e.g. 'Platform Core', 'Distribution') to canonical lowercase slugs declared in slug-translations.json. Owner directive MSG-101 + MSG-105 (2026-04-27): manifests carry slugs only, deterministic L1 sort order. Used by patch-placement-canonical.py.",
+  "owner-directive-2026-04-27": "Manifest placement is slug-only, lowercase, with deterministic scaffoldSortOrder. No display-name strings, no chaos in sort order.",
+
+  "scaffold_synonyms": {
+    "Platform Core":                    "core_platform_services",
+    "PLATFORM CORE":                    "core_platform_services",
+    "Cor":                              "core_platform_services",
+    "core_platform_services":           "core_platform_services",
+
+    "Platform Feature Services":        "platform_capabilities",
+    "PLATFORM FEATURE SERVICES":        "platform_capabilities",
+    "Platform Foundational Service":    "platform_capabilities",
+    "Platform Foundational Services":   "platform_capabilities",
+    "PFS":                              "platform_capabilities",
+    "Foundational Services":            "platform_capabilities",
+    "Frontend":                         "platform_capabilities",
+    "platform_capabilities":            "platform_capabilities",
+
+    "Business":                         "business",
+    "BUSINESS":                         "business",
+    "Business Applications":            "business",
+    "Business Modules":                 "business",
+    "Business Lines (Insurance)":       "business",
+    "Insurance":                        "business",
+    "business":                         "business",
+
+    "Agentic Calling":                  "agentic_calling",
+    "AI":                               "agentic_calling",
+    "AI & Automation":                  "agentic_calling",
+    "agentic_calling":                  "agentic_calling",
+
+    "Support Center":                   "support_center",
+    "Help & Support":                   "support_center",
+    "Help":                             "support_center",
+    "support_center":                   "support_center",
+
+    "User Profile & Preferences":       "user_profile",
+    "User Profile":                     "user_profile",
+    "Administration":                   "user_profile",
+    "user_profile":                     "user_profile",
+
+    "Developer Center":                 "developer_center",
+    "Other":                            "developer_center",
+    "developer_center":                 "developer_center"
+  },
+
+  "businessLine_synonyms": {
+    "Distribution":                     "distribution",
+    "Distribution Side":                "distribution",
+    "distribution":                     "distribution",
+
+    "Servicing":                        "servicing",
+    "Servicing Side":                   "servicing",
+    "Claims":                           "servicing",
+    "Underwriting":                     "servicing",
+    "Operations":                       "servicing",
+    "Advisory":                         "servicing",
+    "servicing":                        "servicing",
+
+    "Finance":                          "finance",
+    "finance":                          "finance",
+
+    "Reports & Analytics":              "reports_and_analytics",
+    "Reporting & Analytics":            "reports_and_analytics",
+    "reports_and_analytics":            "reports_and_analytics",
+
+    "Compliance":                       "compliance",
+    "Risk":                             "compliance",
+    "Compliance & Risk":                "compliance",
+    "compliance":                       "compliance",
+
+    "FWA":                              "fwa",
+    "Fraud Waste Abuse":                "fwa",
+    "FWA (Fraud, Waste, Abuse)":        "fwa",
+    "fwa":                              "fwa"
+  },
+
+  "scaffold_sortOrder": {
+    "core_platform_services":           10,
+    "platform_capabilities":            20,
+    "business":                         30,
+    "agentic_calling":                  40,
+    "support_center":                   50,
+    "user_profile":                     60,
+    "developer_center":                 70
+  },
+
+  "_notes": [
+    "Synonym map keys are CASE-SENSITIVE — the patcher must ALSO try a lowercased lookup as a fallback to catch unanticipated casing.",
+    "If a manifest's scaffold cannot be resolved through this table AND the manifest has a moduleAlias entry in slug-translations.json, the patcher should fall back to the moduleAlias scaffold.",
+    "If neither path resolves, the patcher MUST fail loudly — silent fallback would re-introduce the chaos this file is meant to eliminate.",
+    "businessLine 'Claims' historically meant 'a Servicing-side capability area'. We map it to 'servicing'. The capabilityArea slug carries the finer-grained intent ('claims_management')."
+  ]
+}
